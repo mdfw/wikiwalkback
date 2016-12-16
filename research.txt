@@ -28,3 +28,6 @@ User Stories:
 * As a user, I should be able to search for a wikipedia article and see an article that links to it from 5 steps away.
 * As a user, I should have the option of a random page instead of typing in something.
 * As a user, I should be able to click on any found item and open that page.
+
+
+http://survivejs.com/webpack/advanced-techniques/linting/
