@@ -13,6 +13,7 @@ module.exports = {
       // Default to single quotes and raise an error if something
       // else is used
       "quotes": [2, "single"],
-      "react/jsx-filename-extension": 0
+      "react/jsx-filename-extension": 0,
+      "object-shorthand": 0
     }
 };
