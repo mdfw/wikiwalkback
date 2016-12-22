@@ -1,6 +1,6 @@
 # Thinkful React Starter
 
-A template for developing React apps.
+A template for developing React/Redux apps.
 
 ## Getting started
 
