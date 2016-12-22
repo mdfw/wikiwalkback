@@ -1,0 +1,59 @@
+.searchArea {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searchAreaMid {
+  top: 50%;
+}
+
+.searchAreaHigh {
+  top: 10%;
+}
+
+.moveSearchMid-enter {
+  opacity: 0.01;
+}
+
+.moveSearchMid-enter.moveSearchMid-enter-active {
+  opacity: 1;
+  transition: opacity 300ms ease-in;
+}
+
+.moveSearchMid-leave {
+  opacity: 0.01;
+}
+
+.moveSearchMid-leave.moveSearchMid-leave-active {
+  opacity: 0.01;
+  transition: opacity 1ms ease-in;
+}
+
+
+.moveSearchHigh-enter {
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.moveSearchHigh-enter.moveSearchHigh-enter-active {
+  margin: 0,
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: top 300ms ease;
+}
+
+.moveSearchHigh-leave {
+  opacity: 1;
+}
+
+.moveSearchHigh-leave.moveSearchHigh-leave-active {
+  opacity: 0.01;
+  transition: opacity 1ms ease-in;
+}

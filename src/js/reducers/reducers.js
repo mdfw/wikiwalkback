@@ -5,7 +5,7 @@ const constants = require('../constants.js');
 function createNewState() {
   return {
     currentInput: '',
-    searchAreaHeightPercent: constants.SEARCH_AREA_HEIGHT_BASE_PERCENT,
+    searchLocation: constants.SEARCH_AREA_LOC_MID,
   };
 }
 
@@ -13,11 +13,9 @@ function createNewState() {
 const walkbackReducer = function walkbackReducer(state = createNewState(), action) {
   console.log('Reducing: ' + action.type);
   switch (action.type) {
-    case actions.SEARCH_AREA_HEIGHT: {
+    case actions.SEARCH_AREA_LOC: {
       const newstate = Object.assign({}, state);
-      newstate.searchAreaHeightPercent = action.searchHeight;
-      console.log('Search height: ' + action.searchHeight + ' || Newstate: ');
-      console.dir(newstate);
+      newstate.searchLocation = action.location;
       return newstate;
     }
     default:

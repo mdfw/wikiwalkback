@@ -7,20 +7,13 @@ import actions from '../actions/actions';
 class SearchFormContainer extends React.Component {
   onSubmit(e) {
     e.preventDefault();
-    const newHeight = this.props.searchAreaHeightPercent - constants.SEARCH_AREA_MOVE_PERCENT;
-    this.moveSearchUp(newHeight);
-  }
-  moveSearchUp(toHeight) {
-    this.props.dispatch(
-      actions.searchAreaHeight(toHeight),
-    );
-    if (toHeight > constants.SEARCH_AREA_HEIGHT_MIN_PERCENT) {
-      const newHeight = toHeight - constants.SEARCH_AREA_MOVE_PERCENT;
-      const that = this;
-      window.setTimeout(function setNewHeight() {
-        that.moveSearchUp(newHeight);
-      }, constants.SEARCH_AREA_MOVE_DELAY);
+    let toWhere = constants.SEARCH_AREA_LOC_TOP;
+    if (this.props.searchLocation === constants.SEARCH_AREA_LOC_TOP) {
+      toWhere = constants.SEARCH_AREA_LOC_MID;
     }
+    this.props.dispatch(
+      actions.searchAreaLoc(toWhere),
+    );
   }
   render() {
     return (
@@ -30,14 +23,14 @@ class SearchFormContainer extends React.Component {
 }
 
 SearchFormContainer.propTypes = {
-  searchAreaHeightPercent: React.PropTypes.number.isRequired,
+  searchLocation: React.PropTypes.string.isRequired,
   dispatch: React.PropTypes.func.isRequired,
 };
 
 /** redux store map **/
 const mapStateToProps = function mapStateToProps(state) {
   return {
-    searchAreaHeightPercent: state.searchAreaHeightPercent,
+    searchLocation: state.searchLocation,
   };
 };
 

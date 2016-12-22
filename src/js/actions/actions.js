@@ -1,10 +1,10 @@
-const SEARCH_AREA_HEIGHT = 'SEARCH_AREA_HEIGHT';
-const searchAreaHeight = function searchAreaHeight(height) {
+const SEARCH_AREA_LOC = 'SEARCH_AREA_LOC';
+const searchAreaLoc = function searchAreaLoc(location) {
   return {
-    type: SEARCH_AREA_HEIGHT,
-    searchHeight: height,
+    type: SEARCH_AREA_LOC,
+    location: location,
   };
 };
 
-exports.SEARCH_AREA_HEIGHT = SEARCH_AREA_HEIGHT;
-exports.searchAreaHeight = searchAreaHeight;
+exports.SEARCH_AREA_LOC = SEARCH_AREA_LOC;
+exports.searchAreaLoc = searchAreaLoc;

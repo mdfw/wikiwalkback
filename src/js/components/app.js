@@ -1,35 +1,45 @@
 import { connect } from 'react-redux';
 import React from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import constants from '../constants';
 import SearchFormContainer from './SearchContainer';
 
 class App extends React.Component {
 
   render() {
-    const topPercent = `${this.props.searchAreaHeightPercent}%`;
-    const divStyle = {
-      margin: 0,
-      position: 'absolute',
-      top: topPercent,
-      left: '50%',
-      transform: 'translate(-50%, -50%)',
-    };
-
+    let divKey = constants.SEARCH_AREA_LOC_MID;
+    let transName = 'moveSearchMid';
+    let classForDiv = 'searchAreaMid';
+    if (this.props.searchLocation === constants.SEARCH_AREA_LOC_TOP) {
+      divKey = constants.SEARCH_AREA_LOC_TOP;
+      transName = 'moveSearchHigh';
+      classForDiv = 'searchAreaHigh';
+    }
     return (
-      <div style={divStyle} id="mainapp">
-        <SearchFormContainer />
-      </div>
+      <ReactCSSTransitionGroup
+        transitionName={transName}
+        transitionEnterTimeout={300}
+        transitionLeaveTimeout={1}
+      >
+        <div id="mainapp" className={['searchArea', classForDiv].join(' ')} key={divKey}>
+          <SearchFormContainer />
+        </div>
+
+      </ReactCSSTransitionGroup>
+
     );
   }
 }
 
 App.propTypes = {
-  searchAreaHeightPercent: React.PropTypes.number.isRequired,
+  searchLocation: React.PropTypes.string.isRequired,
 };
 
 /** redux store map **/
 const mapStateToProps = function mapStateToProps(state) {
   return {
     searchAreaHeightPercent: state.searchAreaHeightPercent,
+    searchLocation: state.searchLocation,
   };
 };
 
