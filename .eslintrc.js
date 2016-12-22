@@ -5,6 +5,10 @@ module.exports = {
         "jsx-a11y",
         "import"
     ],
+    "env": {
+        "browser": true,
+        "node": true,
+    },
     "rules": {
       // Disable `no-console` rule
       "no-console": 0,
@@ -14,6 +18,7 @@ module.exports = {
       // else is used
       "quotes": [2, "single"],
       "react/jsx-filename-extension": 0,
-      "object-shorthand": 0
+      "object-shorthand": 0,
+      "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }]
     }
 };
