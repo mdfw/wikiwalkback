@@ -1,11 +1,10 @@
-
-const EXAMPLE_CHANGE = 'EXAMPLE_CHANGE';
-const exampleChange = function guessInputChange(changedInput) {
+const SEARCH_AREA_HEIGHT = 'SEARCH_AREA_HEIGHT';
+const searchAreaHeight = function searchAreaHeight(height) {
   return {
-    type: EXAMPLE_CHANGE,
-    changedInput: changedInput,
+    type: SEARCH_AREA_HEIGHT,
+    searchHeight: height,
   };
 };
 
-exports.EXAMPLE_CHANGE = EXAMPLE_CHANGE;
-exports.exampleChange = exampleChange;
+exports.SEARCH_AREA_HEIGHT = SEARCH_AREA_HEIGHT;
+exports.searchAreaHeight = searchAreaHeight;

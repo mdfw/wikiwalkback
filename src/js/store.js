@@ -7,7 +7,7 @@ const compose = redux.compose;
 const applyMiddleware = redux.applyMiddleware;
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose; // eslint-disable-line
-const store = createStore(reducers.hotcoldReducer, composeEnhancers(
+const store = createStore(reducers.walkbackReducer, composeEnhancers(
     applyMiddleware(thunk),
   ));
 
