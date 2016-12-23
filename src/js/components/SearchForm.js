@@ -2,10 +2,10 @@ import React from 'react';
 
 
 class SearchForm extends React.Component {
-
+  onChange(e) {
+    this.props.onChange(e.target.value);
+  }
   render() {
-    console.dir(this.state);
-    console.dir(this.props);
     const searchStyle = {
       float: 'none',
       maxWidth: '95%',
@@ -21,8 +21,8 @@ class SearchForm extends React.Component {
     return (
       <div style={searchStyle} className="search-container">
         <form style={formStyle} onSubmit={this.props.onSubmit}>
-          <input type="text" />
-          <button type="submit" value="Submit" />
+          <input type="text" onChange={(e) => this.onChange(e)} value={this.props.currentInput} />
+          <button type="submit" value="Submit">Walk back</button>
         </form>
       </div>
     );
@@ -31,6 +31,8 @@ class SearchForm extends React.Component {
 
 SearchForm.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
+  onChange: React.PropTypes.func.isRequired,
+  currentInput: React.PropTypes.func.isRequired,
 };
 
 export default SearchForm;

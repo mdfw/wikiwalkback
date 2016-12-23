@@ -15,9 +15,18 @@ class SearchFormContainer extends React.Component {
       actions.searchAreaLoc(toWhere),
     );
   }
+  onChange(input) {
+    this.props.dispatch(
+      actions.searchInput(input),
+    );
+  }
   render() {
     return (
-      <SearchForm onSubmit={(e) => this.onSubmit(e)} />
+      <SearchForm
+        onSubmit={(e) => this.onSubmit(e)}
+        onChange={(input) => this.onChange(input)}
+        currentInput={this.props.currentInput}
+      />
     );
   }
 }
@@ -25,12 +34,14 @@ class SearchFormContainer extends React.Component {
 SearchFormContainer.propTypes = {
   searchLocation: React.PropTypes.string.isRequired,
   dispatch: React.PropTypes.func.isRequired,
+  currentInput: React.PropTypes.string.isRequired,
 };
 
 /** redux store map **/
 const mapStateToProps = function mapStateToProps(state) {
   return {
     searchLocation: state.searchLocation,
+    currentInput: state.currentInput,
   };
 };
 
