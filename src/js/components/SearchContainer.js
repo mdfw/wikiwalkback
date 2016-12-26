@@ -3,6 +3,7 @@ import React from 'react';
 import SearchForm from './SearchForm';
 import constants from '../constants';
 import actions from '../actions/actions';
+import fetchWikis from '../actions/fetchWikis';
 
 class SearchFormContainer extends React.Component {
   onSubmit(e) {
@@ -13,6 +14,9 @@ class SearchFormContainer extends React.Component {
     }
     this.props.dispatch(
       actions.searchAreaLoc(toWhere),
+    );
+    this.props.dispatch(
+      fetchWikis.fetchPage(null, this.props.currentInput,0),
     );
   }
   onChange(input) {

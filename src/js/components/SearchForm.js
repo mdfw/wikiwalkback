@@ -32,7 +32,7 @@ class SearchForm extends React.Component {
 SearchForm.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
-  currentInput: React.PropTypes.func.isRequired,
+  currentInput: React.PropTypes.string.isRequired,
 };
 
 export default SearchForm;

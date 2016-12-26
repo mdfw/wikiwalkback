@@ -4,6 +4,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import App from './components/app';
 
+
 document.addEventListener('DOMContentLoaded', function() { // eslint-disable-line
   render(
     <Provider store={store}>
