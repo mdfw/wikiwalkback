@@ -19,6 +19,8 @@ module.exports = {
       "quotes": [2, "single"],
       "react/jsx-filename-extension": 0,
       "object-shorthand": 0,
-      "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }]
+      "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
+      "prefer-template": 0,
+      "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
     }
 };
