@@ -43,7 +43,7 @@ class Walking {
             return actions.walkError('No links found to walk from round .' + previousRound.round);
           }
           if (links.length > constants.WALK_WIDTH) {
-              return actions.walkError('Too many links returned from round ' + previousRound.round + '. Links: ' + JSON.stringify(links));
+            return actions.walkError('Too many links returned from round ' + previousRound.round + '. Links: ' + JSON.stringify(links));
           }
           console.log('    ...with these links: ' + JSON.stringify(links));
           return actions.updateRound(round.round, constants.ROUND_STATUS_SETLINKS, links);

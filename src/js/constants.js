@@ -13,9 +13,10 @@ exports.WALK_STATUS_INPUT = 'walk_gather_input';
 // The subscriber listens for this and sets STATUS_RUNNING
 exports.WALK_STATUS_START = 'walk_start';
 // Preparing for walk - set by subscriber when preparing walk.
-exports.WALK_STATUS_PREPARING = 'walk_prepare'
+exports.WALK_STATUS_PREPARING = 'walk_prepare';
 // Walk running - set by subscriber when walk starts
 exports.WALK_STATUS_RUNNING = 'walk_running';
+// Walk Picking final - the walk engine is picking the final page.
 exports.WALK_PICK_FINAL = 'walk_picking_final';
 // Walk ended
 exports.WALK_STATUS_END = 'walk_end';
@@ -25,7 +26,7 @@ exports.WALK_STATUS_ERROR = 'walk_error';
 // walk_width controls how many random links
 // to follow per round.
 exports.WALK_WIDTH = 3;
-
+// WALK_DEPTH determines how many rounds of fetching to run.
 exports.WALK_DEPTH = 2;
 
 // walk_width_min controls the minimum number
