@@ -1,14 +1,3 @@
-const constants = require('./constants.js');
-
-class FetchRound {
-  constructor(round = 0, status = constants.ROUND_STATUS_LOAD) {
-    this.round = round;
-    this.status = status;
-    this.pageIdsToFetch = [];
-    this.pages = [];
-  }
-}
-
 class WikiPage {
   constructor(id = '-1', title = '', thumb = null, image = null, links = []) {
     this.pageId = id;       // pageid
@@ -19,7 +8,7 @@ class WikiPage {
   }
 }
 
-class WikiPageLinksHere {
+class WikiLinkIdentifier {
   constructor(id = '-1', title = '') {
     this.linkId = id;        // pageid
     this.linkTitle = title;  // title
@@ -34,7 +23,6 @@ class WikiThumbnail {
   }
 }
 
-module.exports.FetchRound = FetchRound;
-module.exports.WikiPage = WikiPage;
-module.exports.WikiThumbnail = WikiThumbnail;
-module.exports.WikiPageLinksHere = WikiPageLinksHere;
+module.exports.Page = WikiPage;
+module.exports.Thumbnail = WikiThumbnail;
+module.exports.LinkIdentifier = WikiLinkIdentifier;
