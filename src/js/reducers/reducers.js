@@ -60,6 +60,7 @@ function createNewState() {
   }
   return {
     currentInput: '',
+    searchReady: false,
     searchLocation: constants.SEARCH_AREA_LOC_MID,
     walkStatus: constants.WALK_STATUS_INPUT,
     walkError: null,
@@ -97,6 +98,7 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
     case actions.SEARCH_INPUT: {
       const newstate = Object.assign({}, state);
       newstate.currentInput = action.input;
+      newstate.searchReady = action.input.length > 0 ? true : false;
       return newstate;
     }
     case actions.UPDATE_WALK_STATUS: {

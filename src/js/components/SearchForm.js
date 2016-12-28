@@ -17,12 +17,11 @@ class SearchForm extends React.Component {
     const formStyle = {
       textAlign: 'center',
     };
-
     return (
       <div style={searchStyle} className="search-container">
         <form style={formStyle} onSubmit={this.props.onSubmit}>
           <input type="text" onChange={(e) => this.onChange(e)} value={this.props.currentInput} />
-          <button type="submit" value="Submit">Walk back</button>
+          <button type="submit" value="Submit" disabled={!this.props.searchReady}>Walk back</button>
         </form>
       </div>
     );
