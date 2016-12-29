@@ -9,7 +9,7 @@ class SearchFormContainer extends React.Component {
     e.preventDefault();
     let toWhere = constants.SEARCH_AREA_LOC_TOP;
     if (this.props.searchLocation === constants.SEARCH_AREA_LOC_TOP) {
-      toWhere = constants.SEARCH_AREA_LOC_MID;
+      toWhere = constants.SEARCH_AREA_LOC_TOP;
     }
     this.props.dispatch(
       actions.searchAreaLoc(toWhere),

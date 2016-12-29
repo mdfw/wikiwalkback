@@ -32,6 +32,7 @@ SearchForm.propTypes = {
   onSubmit: React.PropTypes.func.isRequired,
   onChange: React.PropTypes.func.isRequired,
   currentInput: React.PropTypes.string.isRequired,
+  searchReady: React.PropTypes.bool.isRequired,
 };
 
 export default SearchForm;

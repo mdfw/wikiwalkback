@@ -3,6 +3,7 @@ import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import constants from '../constants';
 import SearchFormContainer from './SearchContainer';
+import WordClouds from './WordClouds';
 
 class App extends React.Component {
 
@@ -21,8 +22,13 @@ class App extends React.Component {
         transitionEnterTimeout={300}
         transitionLeaveTimeout={1}
       >
-        <div id="mainapp" className={['searchArea', classForDiv].join(' ')} key={divKey}>
+        <div id="mainapp">
+          <div id="searchFromHolder" className={['searchArea', classForDiv].join(' ')} key={divKey}>
           <SearchFormContainer />
+          </div>
+          <div id="cloudy">
+          <WordClouds />
+          </div>
         </div>
 
       </ReactCSSTransitionGroup>

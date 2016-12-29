@@ -98,7 +98,7 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
     case actions.SEARCH_INPUT: {
       const newstate = Object.assign({}, state);
       newstate.currentInput = action.input;
-      newstate.searchReady = action.input.length > 0 ? true : false;
+      newstate.searchReady = action.input.length > 0;
       return newstate;
     }
     case actions.UPDATE_WALK_STATUS: {
@@ -124,7 +124,11 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
       if (foundRound) {
         const updatedRound = updateRound(foundRound, action);
         const newstate = Object.assign({}, state);
-        newstate.rounds[action.round] = updatedRound;
+        const newRounds = newstate
+          .rounds.slice(0, action.round)
+          .concat(updatedRound)
+          .concat(newstate.rounds.slice(action.round + 1));
+        newstate.rounds = newRounds;
         console.log('::walkbackReducer:newstate');
         console.dir(newstate);
         return newstate;

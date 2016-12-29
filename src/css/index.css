@@ -57,3 +57,7 @@
   opacity: 0.01;
   transition: opacity 1ms ease-in;
 }
+
+@keyframes blinker {
+  50% { opacity: 0.2; }
+}

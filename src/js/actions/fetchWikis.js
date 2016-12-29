@@ -3,14 +3,6 @@ import actions from '../actions/actions';
 const fetch = require('isomorphic-fetch');
 const Wiki = require('../wikiClasses');
 
-const FETCH_PAGE_ERROR = 'FETCH_PAGE_ERROR';
-const fetchPageError = function fetchPageError(error) {
-  return {
-    type: FETCH_PAGE_ERROR,
-    error: error,
-  };
-};
-
 const parseThumbnail = function parseThumbnail(pagedata) {
   const thumb = pagedata.thumbnail;
   if (thumb) {
@@ -103,11 +95,10 @@ const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
       );
     })
     .catch(function processFetchError(error) {
-      // TODO: We don't actually do anything with this error.
       console.log('Error: ');
       console.dir(error);
       return dispatch(
-        fetchPageError(error),
+        actions.walkError(error),
       );
     });
   };
@@ -128,6 +119,5 @@ const dispatchFetches = function dispatchFetches(round, pageIdentifiers) {
     });
   };
 };
-exports.FETCH_PAGE_ERROR = FETCH_PAGE_ERROR;
 exports.fetchPage = fetchPage;
 exports.dispatchFetches = dispatchFetches;

@@ -27,7 +27,7 @@ exports.WALK_STATUS_ERROR = 'walk_error';
 // to follow per round.
 exports.WALK_WIDTH = 3;
 // WALK_DEPTH determines how many rounds of fetching to run.
-exports.WALK_DEPTH = 2;
+exports.WALK_DEPTH = 4;
 
 // walk_width_min controls the minimum number
 // of links needed to go to the next round.
