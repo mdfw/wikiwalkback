@@ -13,21 +13,20 @@ class WordClouds extends React.Component {
         nextRoundToFetch = allRounds[nextround].pagesToFetch;
       }
       if (round.pagesFetched.length > 0) {
-        wordCloudContainers.push( 
-          <WordCloudContainer roundData={round} key={round.round} toFetch={nextRoundToFetch}/>
-        )
+        wordCloudContainers.push(
+          <WordCloudContainer roundData={round} key={round.round} toFetch={nextRoundToFetch} />,
+        );
       }
     });
     console.log('WordClouds built ' + wordCloudContainers.length + ' containers. Here it is: ');
     if (wordCloudContainers.length > 0) {
-          console.dir(wordCloudContainers);
-
+      console.dir(wordCloudContainers);
     }
     return (
-      <div id='wordClouds'>
-      { wordCloudContainers }
+      <div id="wordClouds">
+        { wordCloudContainers }
       </div>
-     );
+    );
   }
 }
 
