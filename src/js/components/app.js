@@ -4,6 +4,7 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import constants from '../constants';
 import SearchFormContainer from './SearchContainer';
 import WordClouds from './WordClouds';
+import Header from './Header';
 
 class App extends React.Component {
 
@@ -23,6 +24,7 @@ class App extends React.Component {
         transitionLeaveTimeout={1}
       >
         <div id="mainapp">
+          <Header />
           <div id="searchFromHolder" className={['searchArea', classForDiv].join(' ')} key={divKey}>
           <SearchFormContainer />
           </div>

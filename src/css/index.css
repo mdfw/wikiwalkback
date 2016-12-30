@@ -1,3 +1,8 @@
+@font-face {
+    font-family: EBGaramond-Regular;
+    src: url(assets/EBGaramond-Regular.ttf);
+}
+
 .searchArea {
   margin: 0;
   position: absolute;
