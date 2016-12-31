@@ -2,39 +2,20 @@ import { connect } from 'react-redux';
 import React from 'react';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import constants from '../constants';
-import SearchFormContainer from './SearchContainer';
-import WordClouds from './WordClouds';
 import Header from './Header';
+import Search from './Search';
 
 class App extends React.Component {
 
   render() {
-    let divKey = constants.SEARCH_AREA_LOC_MID;
-    let transName = 'moveSearchMid';
-    let classForDiv = 'searchAreaMid';
-    if (this.props.searchLocation === constants.SEARCH_AREA_LOC_TOP) {
-      divKey = constants.SEARCH_AREA_LOC_TOP;
-      transName = 'moveSearchHigh';
-      classForDiv = 'searchAreaHigh';
-    }
-    return (
-      <ReactCSSTransitionGroup
-        transitionName={transName}
-        transitionEnterTimeout={300}
-        transitionLeaveTimeout={1}
-      >
-        <div id="mainapp">
-          <Header />
-          <div id="searchFromHolder" className={['searchArea', classForDiv].join(' ')} key={divKey}>
-          <SearchFormContainer />
-          </div>
-          <div id="cloudy">
-          <WordClouds />
-          </div>
+     return (
+       <div id="mainapp">
+        <Header />
+        <div className="bgImage">
+          <img alt="name" src="assets/Wikipedia-puzzleglobe-V2_back.png" />
         </div>
-
-      </ReactCSSTransitionGroup>
-
+        <Search />
+      </div>
     );
   }
 }

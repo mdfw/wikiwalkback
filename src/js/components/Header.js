@@ -2,7 +2,7 @@ import React from 'react';
 
 const Header = function Header() {
   const headerStyle = {
-    fontFamily: 'EBGaramond-Regular',
+    fontFamily: '"EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif',
     maxWidth: '95%',
     padding: '.3em',
     textAlign: 'center',

@@ -10,10 +10,11 @@ const searchAreaLoc = function searchAreaLoc(location) {
 };
 
 const SEARCH_INPUT = 'SEARCH_INPUT';
-const searchInput = function searchInput(input) {
+const searchInput = function searchInput(input, depth) {
   return {
     type: SEARCH_INPUT,
     input: input,
+    depth: depth,
   };
 };
 

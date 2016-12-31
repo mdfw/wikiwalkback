@@ -1,6 +1,15 @@
 @font-face {
     font-family: EBGaramond-Regular;
-    src: url(assets/EBGaramond-Regular.ttf);
+    src: url(EBGaramond-Regular.ttf);
+}
+
+.bgImage {
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  opacity: 0.2;
 }
 
 .searchArea {
