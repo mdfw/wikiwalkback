@@ -7,21 +7,13 @@ import SearchFormContainer from './SearchContainer';
 class App extends React.Component {
 
   render() {
-    let divKey = constants.SEARCH_AREA_LOC_MID;
-    let transName = 'moveSearchMid';
-    let classForDiv = 'searchAreaMid';
-    if (this.props.searchLocation === constants.SEARCH_AREA_LOC_TOP) {
-      divKey = constants.SEARCH_AREA_LOC_TOP;
-      transName = 'moveSearchHigh';
-      classForDiv = 'searchAreaHigh';
-    }
     return (
       <ReactCSSTransitionGroup
-        transitionName={transName}
+        transitionName='searchInOut'
         transitionEnterTimeout={300}
-        transitionLeaveTimeout={1}
+        transitionLeaveTimeout={300}
       >
-        <div id="searchFormHolder" className={['searchArea', 'searchAreaMid'].join(' ')} key={divKey}>
+        <div id="searchFormHolder" className='searchArea' key='searchAreaMid'>
           <SearchFormContainer />
         </div>
       </ReactCSSTransitionGroup>

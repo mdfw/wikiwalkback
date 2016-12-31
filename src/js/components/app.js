@@ -6,15 +6,18 @@ import Header from './Header';
 import Search from './Search';
 
 class App extends React.Component {
-
   render() {
+  let childd = []
+  if (this.props.searchLocation === constants.SEARCH_AREA_LOC_MID) {
+    childd.push(<Search />)
+  }
      return (
        <div id="mainapp">
         <Header />
         <div className="bgImage">
           <img alt="name" src="assets/Wikipedia-puzzleglobe-V2_back.png" />
         </div>
-        <Search />
+        {childd}
       </div>
     );
   }
