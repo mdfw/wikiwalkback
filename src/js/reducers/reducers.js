@@ -60,6 +60,7 @@ function createNewState() {
   }
   return {
     currentInput: '',
+    walkDepth: constants.WALK_DEPTH,
     searchReady: false,
     searchLocation: constants.SEARCH_AREA_LOC_MID,
     walkStatus: constants.WALK_STATUS_INPUT,
@@ -98,6 +99,9 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
     case actions.SEARCH_INPUT: {
       const newstate = Object.assign({}, state);
       newstate.currentInput = action.input;
+      if (action.depth <= constants.WALK_DEPTH_MAX && action.depth >= constants.WALK_DEPTH_MIN) {
+        newstate.walkDepth = action.depth;
+      }
       newstate.searchReady = action.input.length > 0;
       return newstate;
     }

@@ -23,12 +23,16 @@ exports.WALK_STATUS_END = 'walk_end';
 // Error happened
 exports.WALK_STATUS_ERROR = 'walk_error';
 
+// walk_width_min controls the minimum number
+// of links needed to go to the next round.
+exports.WALK_WIDTH_MIN = 1;
 // walk_width controls how many random links
 // to follow per round.
 exports.WALK_WIDTH = 3;
 // WALK_DEPTH determines how many rounds of fetching to run.
 exports.WALK_DEPTH = 4;
+// MAX number of steps to a walk.
+exports.WALK_DEPTH_MAX = 5;
+// MAX number of steps to a walk.
+exports.WALK_DEPTH_MIN = 2;
 
-// walk_width_min controls the minimum number
-// of links needed to go to the next round.
-exports.WALK_WIDTH_MIN = 1;
