@@ -42,7 +42,7 @@ SearchFormContainer.propTypes = {
 const mapStateToProps = function mapStateToProps(state) {
   return {
     currentInput: state.currentInput,
-    walkDepth: state.walkDepth,
+    walkDepth: state.rounds.length,
     searchReady: state.searchReady,
   };
 };

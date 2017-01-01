@@ -52,19 +52,22 @@ class FetchRound {
   }
 }
 
-// Creating a new state
-function createNewState() {
+function buildRounds(walkDepth) {
   const theRounds = [];
-  for (let i = 0; i < constants.WALK_DEPTH; i++) {
+  for (let i = 0; i < walkDepth; i++) {
     theRounds.push(new FetchRound(i));
   }
+  return theRounds;
+}
+// Creating a new state
+function createNewState() {
+  const newRounds = buildRounds(constants.WALK_DEPTH);
   return {
     currentInput: '',
-    walkDepth: constants.WALK_DEPTH,
     searchReady: false,
     walkStatus: constants.WALK_STATUS_INPUT,
     walkError: null,
-    rounds: theRounds,
+    rounds: newRounds,
     finalPageLink: null,
   };
 }
@@ -99,7 +102,9 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
       if (action.depth &&
         action.depth <= constants.WALK_DEPTH_MAX &&
         action.depth >= constants.WALK_DEPTH_MIN) {
-        newstate.walkDepth = action.depth;
+        if (action.depth !== newstate.rounds.length) {
+          newstate.rounds = buildRounds(action.depth);
+        }
       }
       return newstate;
     }
