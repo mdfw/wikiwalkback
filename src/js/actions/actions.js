@@ -1,14 +1,6 @@
 import fetchWikis from '../actions/fetchWikis';
 import constants from '../constants';
 
-const SEARCH_AREA_LOC = 'SEARCH_AREA_LOC';
-const searchAreaLoc = function searchAreaLoc(location) {
-  return {
-    type: SEARCH_AREA_LOC,
-    location: location,
-  };
-};
-
 const SEARCH_INPUT = 'SEARCH_INPUT';
 const searchInput = function searchInput(input, depth) {
   return {
@@ -79,10 +71,6 @@ const startFetch = function startFetch(round, pagesToFetch) {
     );
   };
 };
-
-
-exports.SEARCH_AREA_LOC = SEARCH_AREA_LOC;
-exports.searchAreaLoc = searchAreaLoc;
 
 exports.SEARCH_INPUT = SEARCH_INPUT;
 exports.searchInput = searchInput;

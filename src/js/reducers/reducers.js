@@ -62,7 +62,6 @@ function createNewState() {
     currentInput: '',
     walkDepth: constants.WALK_DEPTH,
     searchReady: false,
-    searchLocation: constants.SEARCH_AREA_LOC_MID,
     walkStatus: constants.WALK_STATUS_INPUT,
     walkError: null,
     rounds: theRounds,
@@ -91,22 +90,21 @@ const updateRound = function updateRound(roundData, action) {
 const walkbackReducer = function walkbackReducer(state = createNewState(), action) {
   console.log('::walkbackReducer:Reducing: ' + action.type + '  ' + JSON.stringify(action));
   switch (action.type) {
-    case actions.SEARCH_AREA_LOC: {
-      const newstate = Object.assign({}, state);
-      newstate.searchLocation = action.location;
-      return newstate;
-    }
+
     case actions.SEARCH_INPUT: {
       const newstate = Object.assign({}, state);
-      newstate.currentInput = action.input;
-      if (action.depth <= constants.WALK_DEPTH_MAX && action.depth >= constants.WALK_DEPTH_MIN) {
+      if (action.input) {
+        newstate.currentInput = action.input;
+        newstate.searchReady = action.input.length > 0;
+      }
+      if (action.depth &&
+        action.depth <= constants.WALK_DEPTH_MAX &&
+        action.depth >= constants.WALK_DEPTH_MIN) {
         newstate.walkDepth = action.depth;
       }
-      newstate.searchReady = action.input.length > 0;
       return newstate;
     }
     case actions.UPDATE_WALK_STATUS: {
-      console.log('::walkbackReducer:UPDATE_WALK_STATUS: ', action.status);
       const newstate = Object.assign({}, state);
       newstate.walkStatus = action.status;
       return newstate;
@@ -123,7 +121,6 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
       return newstate;
     }
     case actions.UPDATE_ROUND: {
-      console.log('::walkbackReducer:UPDATE_ROUND:round: ', action.round);
       const foundRound = state.rounds[action.round];
       if (foundRound) {
         const updatedRound = updateRound(foundRound, action);
@@ -133,7 +130,6 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
           .concat(updatedRound)
           .concat(newstate.rounds.slice(action.round + 1));
         newstate.rounds = newRounds;
-        console.log('::walkbackReducer:newstate');
         console.dir(newstate);
         return newstate;
       }
@@ -148,22 +144,3 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
 
 exports.walkbackReducer = walkbackReducer;
 
-
-/*
-const findRound = function findRound(rounds, roundToFind) {
-  console.log('::findRound2:roundToFind: ' + roundToFind + ' rounds: ');
-  console.dir(rounds);
-  const filteredRounds = rounds.filter(function filterRounds(thisround) {
-    console.log('thisRound.round: ' + thisround.round + ' roundToFind: ' + roundToFind);
-    return thisround.round === roundToFind;
-  });
-  console.log('::findRound2:filteredRounds: ');
-  console.dir(filteredRounds);
-
-  if (filteredRounds.length > 0) {
-    return filteredRounds[0];
-  }
-  console.log('ERROR ::findRound2: Did not find round returning null');
-  return null;
-};
-*/
