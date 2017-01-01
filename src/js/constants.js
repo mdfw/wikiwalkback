@@ -1,6 +1,3 @@
-exports.SEARCH_AREA_LOC_TOP = 'top';
-exports.SEARCH_AREA_LOC_MID = 'mid';
-
 exports.ROUND_STATUS_NONE = 'round_none';
 exports.ROUND_STATUS_SETLINKS = 'round_setlinks';
 exports.ROUND_STATUS_START = 'round_start'; // May not need
