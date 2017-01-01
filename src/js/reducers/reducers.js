@@ -90,7 +90,6 @@ const updateRound = function updateRound(roundData, action) {
 const walkbackReducer = function walkbackReducer(state = createNewState(), action) {
   console.log('::walkbackReducer:Reducing: ' + action.type + '  ' + JSON.stringify(action));
   switch (action.type) {
-
     case actions.SEARCH_INPUT: {
       const newstate = Object.assign({}, state);
       if (action.input) {
@@ -134,6 +133,10 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
         return newstate;
       }
       break;
+    }
+    case actions.RESET_WALKBACK: {
+      const newstate = createNewState();
+      return newstate;
     }
     default:
       console.log('::walkbackReducer:default return from reducer');

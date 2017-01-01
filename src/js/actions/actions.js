@@ -1,6 +1,13 @@
 import fetchWikis from '../actions/fetchWikis';
 import constants from '../constants';
 
+const RESET_WALKBACK = 'RESET_WALKBACK';
+const resetWalkback = function resetWalkback() {
+  return {
+    type: RESET_WALKBACK,
+  };
+};
+
 const SEARCH_INPUT = 'SEARCH_INPUT';
 const searchInput = function searchInput(input, depth) {
   return {
@@ -71,6 +78,9 @@ const startFetch = function startFetch(round, pagesToFetch) {
     );
   };
 };
+
+exports.RESET_WALKBACK = RESET_WALKBACK;
+exports.resetWalkback = resetWalkback;
 
 exports.SEARCH_INPUT = SEARCH_INPUT;
 exports.searchInput = searchInput;
