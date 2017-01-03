@@ -101,7 +101,7 @@ const fetchingRenderer = (tag, size, color) => (
   >{tag.value}</span>
 );
 
-const solidRenderer = (tag, size, color) => (
+const solidRendererEven = (tag, size, color) => (
   <span
     key={tag.key}
     style={{
@@ -115,6 +115,23 @@ const solidRenderer = (tag, size, color) => (
     }}
   >{tag.value}</span>
 );
+const solidRendererOdd = (tag, size, color) => (
+  <span
+    key={tag.key}
+    style={{
+      fontSize: `${size}em`,
+      border: `2px solid ${color}`,
+      margin: '3px',
+      padding: '3px',
+      display: 'inline-block',
+      color: 'black',
+    }}
+  >{tag.value}</span>
+);
+
+function isEven(n) {
+  return n === parseFloat(n) ? !(n % 2) : void 0; // eslint-disable-line no-void
+}
 
 class ResultRow extends React.Component {
   static linkTitles(linkArray) {
@@ -170,7 +187,8 @@ class ResultRow extends React.Component {
     const rowLinks = this.props.roundData.getFetchedLinks();
     const tags = this.createTagsFromLinks(rowLinks);
     const fetching = this.props.roundData.status === constants.ROUND_STATUS_FETCHING;
-    const renderer = fetching ? fetchingRenderer : solidRenderer;
+    let renderer = isEven(this.props.roundData.round) ? solidRendererEven : solidRendererOdd;
+    renderer = fetching ? fetchingRenderer : renderer;
     return (
       <div className="resultRow">
         <ResultsRowHeader
