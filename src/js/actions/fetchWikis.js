@@ -1,4 +1,5 @@
 import actions from '../actions/actions';
+import constants from '../constants';
 
 const fetch = require('isomorphic-fetch');
 const Wiki = require('../wikiClasses');
@@ -58,7 +59,8 @@ const parseFetchedData = function parseFetchedData(data, pageid = null, pagename
 
 const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
   return function fetchPageDispatch(dispatch) {
-    let url = 'https://en.wikipedia.org/w/api.php?action=query&prop=linkshere|info|pageimages&lhlimit=100&lhnamespace=0&format=json&origin=*&';
+    const lhlimit = constants.FETCH_LINKS_HERE_LIMIT > 0 ? constants.FETCH_LINKS_HERE_LIMIT : 10;
+    let url = 'https://en.wikipedia.org/w/api.php?action=query&prop=linkshere|info|pageimages&lhlimit=' + lhlimit + '&lhnamespace=0&format=json&origin=*&';
     if (pageid && pageid.length !== 0) {
       url = url + 'pageids=' + pageid;
     } else if (pagename.length !== 0) {
