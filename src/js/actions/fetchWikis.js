@@ -58,7 +58,7 @@ const parseFetchedData = function parseFetchedData(data, pageid = null, pagename
 
 const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
   return function fetchPageDispatch(dispatch) {
-    let url = 'https://en.wikipedia.org/w/api.php?action=query&prop=linkshere|info|pageimages&format=json&origin=*&';
+    let url = 'https://en.wikipedia.org/w/api.php?action=query&prop=linkshere|info|pageimages&lhlimit=100&lhnamespace=0&format=json&origin=*&';
     if (pageid && pageid.length !== 0) {
       url = url + 'pageids=' + pageid;
     } else if (pagename.length !== 0) {
