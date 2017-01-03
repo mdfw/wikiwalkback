@@ -3,11 +3,14 @@ import React from 'react';
 import constants from '../constants';
 import Header from './Header';
 import SearchContainer from './SearchContainer';
+import Results from './Results';
 
 function App(props) {
-  const searchState = [];
+  let searchState = '';
   if (props.walkStatus === constants.WALK_STATUS_INPUT) {
-    searchState.push(<SearchContainer key="allsearch" />);
+    searchState = <SearchContainer key="allsearch" />;
+  } else {
+    searchState = <Results />;
   }
   return (
     <div id="mainapp">
