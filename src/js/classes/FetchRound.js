@@ -12,7 +12,7 @@ class FetchRound {
     this.pagesFetched = [];  // Filled with WikiPage
   }
   hasFetchedAll() {
-    if (this.pagesToFetch && this.pagesFetched && this.pagesToFetch.length === this.pagesFetched.length) {
+    if (this.pagesToFetch.length === this.pagesFetched.length) {
       return true;
     }
     return false;
