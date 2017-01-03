@@ -33,3 +33,5 @@ exports.WALK_DEPTH_MAX = 5;
 // MAX number of steps to a walk.
 exports.WALK_DEPTH_MIN = 2;
 
+// Controls the number of links the fetcher requests from Wikipedia
+exports.FETCH_LINKS_HERE_LIMIT = 75;
