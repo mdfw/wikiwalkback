@@ -1,6 +1,7 @@
 import React from 'react';
 import { TagCloud } from 'react-tagcloud';
 import constants from '../constants';
+import FetchRound from '../classes/FetchRound';
 
 function joinArray(arr, between = ', ', last = ' and ') {
   if (!arr) {
@@ -201,11 +202,11 @@ class ResultRow extends React.Component {
 }
 
 ResultRow.propTypes = {
-  roundData: React.PropTypes.object.isRequired,
+  roundData: React.PropTypes.instanceOf(FetchRound).isRequired,
   firstRow: React.PropTypes.bool.isRequired,
   lastRow: React.PropTypes.bool.isRequired,
   maxPossibleLinks: React.PropTypes.number.isRequired,
-  nextRoundData: React.PropTypes.object,
+  nextRoundData: React.PropTypes.instanceOf(FetchRound),
   tagClick: React.PropTypes.func.isRequired,
 };
 export default ResultRow;

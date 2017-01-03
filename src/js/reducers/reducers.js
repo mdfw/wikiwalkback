@@ -1,55 +1,6 @@
+import FetchRound from '../classes/FetchRound';
 const actions = require('../actions/actions');
 const constants = require('../constants');
-
-class FetchRound {
-  constructor(round = 0, status = constants.ROUND_STATUS_NONE) {
-    this.round = round;
-    this.status = status;
-    this.pagesToFetch = [];  // Filled with IdentifierToFetch
-    this.pagesFetched = [];  // Filled with WikiPage
-  }
-  hasFetchedAll() {
-    // TODO: May need to check for validity here?
-    if (this.pagesToFetch.length === this.pagesFetched.length) {
-      return true;
-    }
-    return false;
-  }
-  getAllLinks() {
-    let theLinks = [];
-    this.pagesFetched.forEach(function parsePagesFetched(page) {
-      theLinks = theLinks.concat(page.linkshere);
-    });
-    return theLinks;
-  }
-  getRandomLinks(num = constants.WALK_WIDTH) {
-    /* Randomization code by gonchuki from http://stackoverflow.com/a/5143910 */
-    console.log('::FetchRound:getRandomLinks: getting ' + num + ' random links from ');
-    const alllinks = this.getAllLinks();
-    console.dir(alllinks);
-    if (alllinks.length <= num) {
-      console.log('::FetchRound:getRandomLinks: returning all links because alllinks length (' + alllinks.length + ') is less than num(' + num + ')');
-      return alllinks;
-    }
-    const linkscopy = JSON.parse(JSON.stringify(alllinks));
-    const randLinks = [];
-    for (let i = 0; i < num; i++) {
-      console.log('::FetchRound:getRandomLinks: getting ' + num + ' random links.');
-      const rnd = Math.floor(Math.random() * linkscopy.length);
-      const link = linkscopy.splice(rnd, 1)[0];
-      randLinks.push(link);
-    }
-    return randLinks;
-  }
-  getFetchedLinks(random = 0) {
-    if (random > 0) {
-      console.log('::FetchRound:getFetchedLinks: getting ' + random + ' random links.');
-      return this.getRandomLinks(random);
-    }
-    console.log('::FetchRound:getFetchedLinks: returning all links.');
-    return this.getAllLinks();
-  }
-}
 
 function buildRounds(walkDepth) {
   const theRounds = [];
