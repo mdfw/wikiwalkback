@@ -9,11 +9,12 @@ function buildRounds(walkDepth) {
   }
   return theRounds;
 }
+
 // Creating a new state
 function createNewState() {
   const newRounds = buildRounds(constants.WALK_DEPTH);
   return {
-    currentInput: '',
+    currentInput: '', 
     searchReady: false,
     walkStatus: constants.WALK_STATUS_INPUT,
     walkError: null,
@@ -31,17 +32,14 @@ const updateRound = function updateRound(roundData, action) {
     roundToUpdate.pagesToFetch = action.pagesToFetch;
   }
   if (action.pageFetched) {
-    console.log('::updateRound:updateding PagesFetched');
     roundToUpdate.pagesFetched = roundToUpdate.pagesFetched.concat(action.pageFetched);
   }
-  console.log('::updateRound:updated to: ' + JSON.stringify(roundToUpdate));
   return roundToUpdate;
 };
 
 
 // The main reducer. Looks for the action and makes decisions.
 const walkbackReducer = function walkbackReducer(state = createNewState(), action) {
-  console.log('::walkbackReducer:Reducing: ' + action.type + '  ' + JSON.stringify(action));
   switch (action.type) {
     case actions.SEARCH_INPUT: {
       const newstate = Object.assign({}, state);
@@ -86,7 +84,6 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
           .concat(updatedRound)
           .concat(newstate.rounds.slice(action.round + 1));
         newstate.rounds = newRounds;
-        console.dir(newstate);
         return newstate;
       }
       break;
@@ -96,7 +93,6 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
       return newstate;
     }
     default:
-      console.log('::walkbackReducer:default return from reducer');
       return state;
   }
   return state;
