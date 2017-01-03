@@ -1,6 +1,6 @@
 import FetchRound from '../classes/FetchRound';
-const actions = require('../actions/actions');
-const constants = require('../constants');
+import actions from '../actions/actions';
+import constants from '../constants';
 
 function buildRounds(walkDepth) {
   const theRounds = [];
@@ -14,7 +14,7 @@ function buildRounds(walkDepth) {
 function createNewState() {
   const newRounds = buildRounds(constants.WALK_DEPTH);
   return {
-    currentInput: '', 
+    currentInput: '',
     searchReady: false,
     walkStatus: constants.WALK_STATUS_INPUT,
     walkError: null,
