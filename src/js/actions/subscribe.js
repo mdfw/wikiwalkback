@@ -33,10 +33,14 @@ class Walking {
           }
           const links = previousRound.getFetchedLinks(constants.WALK_WIDTH);
           if (links.length === 0) {
-            return actions.walkError('No links found to walk from round .' + previousRound.round);
+            let message = 'No links found to walk from round ' + previousRound.round + '.';
+            if (round.round === 0) {
+              message += ' This is likely because your search did not return a page.';
+            }
+            return actions.walkError(message);
           }
           if (links.length > constants.WALK_WIDTH) {
-            return actions.walkError('Too many links returned from round ' + previousRound.round + '. Links: ' + JSON.stringify(links));
+            return actions.walkError('Too many links returned from round ' + previousRound.round + '.');
           }
           return actions.updateRound(round.round, constants.ROUND_STATUS_SETLINKS, links);
         }
@@ -80,7 +84,6 @@ function handleChange() {
         nextAction,
       );
     }
-    return;
   }
 }
 
