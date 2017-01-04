@@ -38,6 +38,6 @@ exports.FETCH_LINKS_HERE_LIMIT = 30;
 
 /* Used in results */
 exports.RESULTS_ROW_FIRST = 'first';
-exports.RESULTS_ROW_PENULTIMATE ='penultimate';
+exports.RESULTS_ROW_PENULTIMATE = 'penultimate';
 exports.RESULTS_ROW_LAST = 'last';
 exports.RESULTS_ROW_OTHER = 'other';
