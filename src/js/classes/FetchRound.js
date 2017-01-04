@@ -1,15 +1,15 @@
 import constants from '../constants';
 
-/* FetchRound is the holder for all of the wiki pages returned from a fetch
-   Rounds are held in the state.rounds var.
+/* FetchRound is the holder for all of the wiki page data returned from a fetch.
+   Multiple instances of FetchRound are held in the state.rounds var.
 */
 
 class FetchRound {
   constructor(round = 0, status = constants.ROUND_STATUS_NONE) {
     this.round = round;
     this.status = status;
-    this.pagesToFetch = [];  // Filled with IdentifierToFetch
-    this.pagesFetched = [];  // Filled with WikiPage
+    this.pagesToFetch = [];  // Filled with WikiLinkIdentifier objects
+    this.pagesFetched = [];  // Filled with WikiPage objects
   }
   hasFetchedAll() {
     if (this.pagesToFetch.length === this.pagesFetched.length) {
