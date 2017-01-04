@@ -13,8 +13,11 @@ const parseThumbnail = function parseThumbnail(pagedata) {
 };
 
 const parseLinksHere = function parseLinksHere(pagedata) {
-  const links = [];
   const linkshere = pagedata.linkshere;
+  if (!linkshere) {
+    return [];
+  }
+  const links = [];
   linkshere.forEach(function linkshereparse(link) {
     if (link.ns === 0) {
       const newl = new Wiki.LinkIdentifier(link.pageid, link.title);
@@ -25,31 +28,24 @@ const parseLinksHere = function parseLinksHere(pagedata) {
 };
 
 const parsePage = function parsepage(pagedata) {
-  console.log('::parsePage: ');
-  console.dir(pagedata);
   const newpage = new Wiki.Page(pagedata.pageid, pagedata.title);
   newpage.pageimage = pagedata.pageimage;
   newpage.thumbnail = parseThumbnail(pagedata);
   newpage.linkshere = parseLinksHere(pagedata);
-  console.log('::parsePage: parsedPage:');
-  console.dir(pagedata);
   return newpage;
 };
 
 const parseFetchedData = function parseFetchedData(data, pageid = null, pagename = null) {
   const allpages = data.query.pages;
-  for (const key in allpages) {
-    if (allpages.hasOwnProperty(key)) {
+  for (const key in allpages) {         // eslint-disable-line no-restricted-syntax
+    if (allpages.hasOwnProperty(key)) { // eslint-disable-line no-prototype-builtins
       if (key === -1) {
         break;
       }
       const page = allpages[key];
-      console.log('::ParseFetched: pageid: ' + pageid + ' pagename: ' + pagename + 'Page: ');
-      console.dir(page);
       if ((pageid === page.pageid || pagename.toLowerCase() === page.title.toLowerCase())
             && page.ns === 0) {
         const parsedPage = parsePage(page);
-        console.log('::ParseFetched::parsedPage: ' + parsedPage);
         return parsedPage;
       }
     }
@@ -66,32 +62,22 @@ const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
     } else if (pagename.length !== 0) {
       url = url + 'titles=' + pagename;
     }
-    console.log('fetching url: ' + url);
     return fetch(url).then(function returnFetchResponse(response) {
       if (response.status < 200 || response.status >= 300) {
         const error = new Error(response.statusText);
-        console.log('::fetchPage: fetch error: ');
-        console.dir(error);
         error.response = response;
         throw error;
       }
       return response;
     })
     .then(function processJsonResponse(response) {
-      console.log('::fetchPage:response: ' + response);
       return response.json();
     })
     .then(function parseJsonResponse(data) {
-      console.log('::fetchPage:data from fetch (pageid ' + pageid + ')  (pagename ' + pagename + '): ');
-      console.dir(data);
       const parsed = parseFetchedData(data, pageid, pagename);
-      console.log('::fetchPage:Parsed data: ');
-      console.dir(parsed);
       return parsed;
     })
     .then(function parseFetchedPage(page) {
-      console.log('round: ' + round + 'page: ' + page);
-      console.dir(page);
       return dispatch(
         actions.updateRound(round, null, null, page),
       );
