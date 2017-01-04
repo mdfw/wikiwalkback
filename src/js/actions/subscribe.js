@@ -34,7 +34,7 @@ class Walking {
           const links = previousRound.getFetchedLinks(constants.WALK_WIDTH);
           if (links.length === 0) {
             let message = 'No links found to walk from round ' + previousRound.round + '.';
-            if (round.round === 0) {
+            if (previousRound.round === 0) {
               message += ' This is likely because your search did not return a page.';
             }
             return actions.walkError(message);
