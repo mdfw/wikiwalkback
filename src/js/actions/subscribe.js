@@ -49,7 +49,7 @@ class Walking {
         }
       }
     }
-    const lastLink = this.rounds[this.rounds.length - 1].getFetchedLinks(1);
+    const lastLink = this.rounds[this.rounds.length - 1].getFetchedLinks(1)[0];
     return actions.endWalk(lastLink);
   }
 }

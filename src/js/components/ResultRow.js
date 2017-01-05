@@ -1,89 +1,20 @@
 import React from 'react';
 import { TagCloud } from 'react-tagcloud';
 import constants from '../constants';
-import FetchRound from '../classes/FetchRound';
+import { ResultsRowHeader, ResultsRowFooter } from './ResultRowHeader';
 
-function joinArray(arr, between = ', ', last = ' and ') {
-  if (!arr) {
-    return '';
-  }
-  // Based on http://stackoverflow.com/a/29234240
-  let outStr = '';
-  if (arr.length === 1) {
-    outStr = arr[0];
-  } else if (arr.length === 2) {
-    // joins all with "and" but no commas
-    // example: "bob and sam"
-    outStr = arr.join(last);
-  } else if (arr.length > 2) {
-    // joins all with commas, but last one gets ", and" (oxford comma!)
-    // example: "bob, joe, and sam"
-    outStr = arr.slice(0, -1).join(between) + last + arr.slice(-1);
-  }
-  return outStr;
-}
-
-class ResultsRowHeader extends React.Component {
-  firstRow() {
-    let message = 'Step 1: You searched for "' + joinArray(this.props.fetchedTitles) + '".';
-    if (this.props.fetching) {
-      message += ' Fetching now…';
-    } else if (this.props.linkCount > 0) {
-      const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? 'at least ' : '';
-      message = message + ' I found ' + atLeast + this.props.linkCount + ' pages that link to the "' + joinArray(this.props.fetchedTitles) + '" page:';
-    }
-    return message;
-  }
-  otherRows() {
-    let message = this.props.lastRow ? 'Final Step: ' : 'Step ' + this.props.rowIndex + ': ';
-    if (this.props.fetching) {
-      message += 'Fetching links to ' + joinArray(this.props.fetchedTitles, ', ', ' or ');
-    } else if (this.props.linkCount > 0) {
-      const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? 'at least ' : '';
-      message += ' I found ' + atLeast + this.props.linkCount + ' pages that link to "' + joinArray(this.props.fetchedTitles, '", "', '" or "') + '":';
-    }
-    return message;
-  }
-  render() {
-    const message = this.props.firstRow ? this.firstRow() : this.otherRows();
-    return (
-      <div>
-        { message }
-      </div>
-    );
-  }
-}
-
-ResultsRowHeader.propTypes = {
-  rowIndex: React.PropTypes.number.isRequired,
-  firstRow: React.PropTypes.bool.isRequired,
-  lastRow: React.PropTypes.bool.isRequired,
-  fetchedTitles: React.PropTypes.arrayOf(React.PropTypes.string),
-  linkCount: React.PropTypes.number,
-  fetching: React.PropTypes.bool.isRequired,
-  maxPossibleLinks: React.PropTypes.number.isRequired,
-};
-
-
-const ResultsRowFooter = (props) => {
-  let message = '';
-  if (props.lastRow) {
-    message = 'With that, I present you with the final page:';
-  } else if (props.linkCount > 0 && props.toFetchTitles.length > 0) {
-    message = 'From those ' + props.linkCount + ' pages, I picked ' + props.toFetchTitles.length + ' to move on ot the next step: ' + joinArray(props.toFetchTitles);
-  }
-  return (
-    <div>
-      { message }
-    </div>
-  );
-};
-
-ResultsRowFooter.propTypes = {
-  lastRow: React.PropTypes.bool.isRequired,
-  linkCount: React.PropTypes.number,
-  toFetchTitles: React.PropTypes.arrayOf(React.PropTypes.string),
-};
+/*
+Each row needs:
+1. The row number
+2. The row status
+3. The row position
+4. The list of links associated with this row
+5. The maximum links that could have been retrieved (for the header/footer
+6. The list of links that were searched (fetched) for in this row
+7. The list of links that will be searched for next time (or the final choice)
+8. The boost amount
+9. The tag onClick action
+*/
 
 const fetchingRenderer = (tag, size, color) => (
   <span
@@ -106,7 +37,7 @@ const solidRendererEven = (tag, size, color) => (
     key={tag.key}
     style={{
       fontSize: `${size}em`,
-      border: `2px solid ${color}`,
+      border: `1px solid ${color}`,
       borderRadius: '1em',
       margin: '3px',
       padding: '3px',
@@ -120,7 +51,7 @@ const solidRendererOdd = (tag, size, color) => (
     key={tag.key}
     style={{
       fontSize: `${size}em`,
-      border: `2px solid ${color}`,
+      border: `1px solid ${color}`,
       margin: '3px',
       padding: '3px',
       display: 'inline-block',
@@ -149,31 +80,33 @@ class ResultRow extends React.Component {
     this.props.tagClick(tag.value);
   }
   fetchedTitles() {
-    if (!this.props.roundData || !this.props.roundData.pagesToFetch) {
+    if (!this.props.linksToFetchThis) {
       return [];
     }
-    return ResultRow.linkTitles(this.props.roundData.pagesToFetch);
+    return ResultRow.linkTitles(this.props.linksToFetchThis);
   }
   toFetchTitles() {
-    if (!this.props.nextRoundData || !this.props.nextRoundData.pagesToFetch) {
+    if (!this.props.linksToFetchNext) {
       return [];
     }
-    return ResultRow.linkTitles(this.props.nextRoundData.pagesToFetch);
+    return ResultRow.linkTitles(this.props.linksToFetchNext);
   }
-  createTagsFromLinks(links) {
+  createTagsFromLinks() {
     const tags = [];
-    const roundData = this.props.roundData;
-    let selectedLinks = [];
-    if (this.props.nextRoundData) {
-      selectedLinks = this.props.nextRoundData.pagesToFetch;
+    const boost = this.props.tagSizeBoost;
+    const rowNumber = this.props.rowNumber;
+    const selectedLinks = this.props.linksToFetchNext;
+    if (!selectedLinks) {
+      console.log('!!!SELECTED LINKS EMPTY!!!');
+      console.dir(selectedLinks);
     }
     let keyindex = 1;
-    links.forEach(function toTag(link) {
+    this.props.linksHere.forEach(function toTag(link) {
       const found = selectedLinks.findIndex(function findlink(selectedLink) {
         return selectedLink.linkId === link.linkId || selectedLink.linkTitle === link.linkTitle;
       });
-      const selectedBoost = found > -1 ? 50 : 5;
-      const key = roundData.round + '-' + keyindex + '-' + link.linkTitle;
+      const selectedBoost = found > -1 ? boost : 5;
+      const key = rowNumber + '-' + keyindex + '-' + link.linkTitle;
       keyindex += 1;
       tags.push({
         value: link.linkTitle,
@@ -184,18 +117,21 @@ class ResultRow extends React.Component {
     return tags;
   }
   render() {
-    const rowLinks = this.props.roundData.getFetchedLinks();
-    const tags = this.createTagsFromLinks(rowLinks);
-    const fetching = this.props.roundData.status === constants.ROUND_STATUS_FETCHING;
-    let renderer = isEven(this.props.roundData.round) ? solidRendererEven : solidRendererOdd;
+    const tags = this.createTagsFromLinks();
+    const fetching = this.props.rowStatus === constants.ROUND_STATUS_FETCHING;
+    let renderer = isEven(this.props.rowNumber) ? solidRendererEven : solidRendererOdd;
     renderer = fetching ? fetchingRenderer : renderer;
+    const resultRowStyle = {
+      fontFamily: '"EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif',
+      float: 'none',
+      textAlign: 'center',
+    };
     return (
-      <div className="resultRow">
+      <div className="resultRow" style={resultRowStyle}>
         <ResultsRowHeader
-          rowIndex={this.props.roundData.round + 1}
-          firstRow={this.props.firstRow}
-          lastRow={this.props.lastRow}
-          linkCount={rowLinks.length}
+          rowNumber={this.props.rowNumber}
+          rowPosition={this.props.rowPosition}
+          linkCount={this.props.linksHere.length}
           fetching={fetching}
           fetchedTitles={this.fetchedTitles()}
           maxPossibleLinks={this.props.maxPossibleLinks}
@@ -208,9 +144,8 @@ class ResultRow extends React.Component {
           onClick={tag => this.onClick(tag)}
         />
         <ResultsRowFooter
-          lastRow={this.props.lastRow}
-          linkCount={rowLinks.length}
-          fetching={fetching}
+          rowPosition={this.props.rowPosition}
+          linkCount={this.props.linksHere.length}
           toFetchTitles={this.toFetchTitles()}
           maxPossibleLinks={this.props.maxPossibleLinks}
         />
@@ -220,11 +155,14 @@ class ResultRow extends React.Component {
 }
 
 ResultRow.propTypes = {
-  roundData: React.PropTypes.instanceOf(FetchRound).isRequired,
-  firstRow: React.PropTypes.bool.isRequired,
-  lastRow: React.PropTypes.bool.isRequired,
+  rowNumber: React.PropTypes.number,
+  rowStatus: React.PropTypes.string.isRequired,
+  rowPosition: React.PropTypes.string.isRequired,
+  linksHere: React.PropTypes.arrayOf(React.PropTypes.object),
   maxPossibleLinks: React.PropTypes.number.isRequired,
-  nextRoundData: React.PropTypes.instanceOf(FetchRound),
+  linksToFetchThis: React.PropTypes.arrayOf(React.PropTypes.object),
+  linksToFetchNext: React.PropTypes.arrayOf(React.PropTypes.object),
+  tagSizeBoost: React.PropTypes.number.isRequired,
   tagClick: React.PropTypes.func.isRequired,
 };
 export default ResultRow;

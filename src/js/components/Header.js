@@ -6,6 +6,7 @@ const Header = function Header() {
     maxWidth: '95%',
     padding: '.3em',
     textAlign: 'center',
+    opacity: '1',
   };
   return (
     <div style={headerStyle} id="header">
