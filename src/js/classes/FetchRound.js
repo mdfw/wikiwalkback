@@ -15,6 +15,35 @@ class FetchRound {
     this.pagesToFetch = [];  // Filled with WikiLinkIdentifier objects
     this.pagesFetched = [];  // Filled with WikiPage objects
   }
+  static buildArrayOf(number = 1) {
+    /* Returns an array of FetchRounds with base initialization.
+     * @param number {number} The number of rounds to return.
+     */
+    const theRounds = [];
+    for (let i = 0; i < number; i++) {
+      theRounds.push(new FetchRound(i));
+    }
+    return theRounds;
+  }
+  static copyAndUpdate(round, status, pagesToFetch, pageFetched) {
+    /* Returns a copy of the (round) with updated parts
+      @param: round (FetchRound) Required - The round to copy.
+      @param: status (string) Optional - Status to update
+      @param: pagesToFetch (arrayOf(LinkIdentifier)) - Optional - links to replace.
+      @param: pageFetched (arrayOf(LinkIdentifier)) - Optional - links to merge.
+    */
+    const newRound = Object.assign(new FetchRound(round.round), round);
+    if (status && status.length > 0) {
+      newRound.status = status;
+    }
+    if (pagesToFetch && pagesToFetch.length > 0) {
+      newRound.pagesToFetch = pagesToFetch;
+    }
+    if (pageFetched) {
+      newRound.pagesFetched = newRound.pagesFetched.concat(pageFetched);
+    }
+    return newRound;
+  }
   hasFetchedAll() {
     /* Tests to see if all pages that should be fetched have been. */
     if (this.pagesToFetch.length === this.pagesFetched.length) {
