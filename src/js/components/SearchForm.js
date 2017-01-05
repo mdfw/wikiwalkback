@@ -33,7 +33,7 @@ class SearchForm extends React.Component {
     };
     const selections = [];
     for (let i = this.props.walkDepthMin; i <= this.props.walkDepthMax; i++) {
-      const key = 'depth' + i;
+      const key = `depth${i}`;
       selections.push(<option value={i} key={key}>{i}</option>);
     }
     return (
