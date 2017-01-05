@@ -59,7 +59,19 @@ const solidRendererOdd = (tag, size, color) => (
     }}
   >{tag.value}</span>
 );
-
+const finalRenderer = (tag, size, color) => (
+  <span
+    key={tag.key}
+    style={{
+      fontSize: `${size * 3}em`,
+      border: `1px solid ${color}`,
+      margin: '3px',
+      padding: '3px',
+      display: 'inline-block',
+      color: 'black',
+    }}
+  >{tag.value}</span>
+);
 function isEven(n) {
   return n === parseFloat(n) ? !(n % 2) : void 0; // eslint-disable-line no-void
 }
@@ -75,8 +87,6 @@ class ResultRow extends React.Component {
     return titles;
   }
   onClick(tag) {
-    console.log('Clicked: ' + tag);
-    console.dir(tag);
     this.props.tagClick(tag.value);
   }
   fetchedTitles() {
@@ -96,17 +106,13 @@ class ResultRow extends React.Component {
     const boost = this.props.tagSizeBoost;
     const rowNumber = this.props.rowNumber;
     const selectedLinks = this.props.linksToFetchNext;
-    if (!selectedLinks) {
-      console.log('!!!SELECTED LINKS EMPTY!!!');
-      console.dir(selectedLinks);
-    }
     let keyindex = 1;
     this.props.linksHere.forEach(function toTag(link) {
       const found = selectedLinks.findIndex(function findlink(selectedLink) {
         return selectedLink.linkId === link.linkId || selectedLink.linkTitle === link.linkTitle;
       });
       const selectedBoost = found > -1 ? boost : 5;
-      const key = rowNumber + '-' + keyindex + '-' + link.linkTitle;
+      const key = `${rowNumber}-${keyindex}-${link.linkTitle}`;
       keyindex += 1;
       tags.push({
         value: link.linkTitle,
@@ -121,6 +127,7 @@ class ResultRow extends React.Component {
     const fetching = this.props.rowStatus === constants.ROUND_STATUS_FETCHING;
     let renderer = isEven(this.props.rowNumber) ? solidRendererEven : solidRendererOdd;
     renderer = fetching ? fetchingRenderer : renderer;
+    renderer = constants.RESULTS_ROW_LAST === this.props.rowPosition ? finalRenderer : renderer;
     const resultRowStyle = {
       fontFamily: '"EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif',
       float: 'none',
