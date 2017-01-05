@@ -3,6 +3,15 @@ import { connect } from 'react-redux';
 import ResultRow from './ResultRow';
 import constants from '../constants';
 
+const ResultsRowSeparator = () => {
+  const sepStyle = {
+    height: '40px',
+  };
+  return (
+    <div style={sepStyle} />
+  );
+};
+
 class ResultRows extends React.Component {
   static rowPosition(roundData, nextRoundData) {
     let rowPos = constants.RESULTS_ROW_OTHER;
@@ -44,9 +53,13 @@ class ResultRows extends React.Component {
             maxPossibleLinks={maxPossibleLinks}
             linksToFetchThis={linksToFetchThis}
             linksToFetchNext={linksToFetchNext}
-            tagSizeBoost={50}
+            tagSizeBoost={25}
             tagClick={tagClickCallback}
           />,
+        );
+        const separatorKey = `${roundData.round}sep`;
+        rows.push(
+          <ResultsRowSeparator key={separatorKey} />,
         );
       }
     });
@@ -62,7 +75,7 @@ class ResultRows extends React.Component {
           maxPossibleLinks={maxPossibleLinks}
           linksToFetchThis={links}
           linksToFetchNext={links}
-          tagSizeBoost={100}
+          tagSizeBoost={50}
           tagClick={this.props.finalClick}
         />,
       );
