@@ -1,10 +1,11 @@
 import React from 'react';
 import constants from '../constants';
 
-/* A better joinArray function that allows treats the last item differently
-  Based on http://stackoverflow.com/a/29234240
-*/
+
 function joinArray(arr, between = ', ', last = ' and ') {
+  /* A better joinArray function that allows treats the last item differently
+    Based on http://stackoverflow.com/a/29234240
+  */
   if (!arr) {
     return '';
   }
@@ -23,22 +24,22 @@ function joinArray(arr, between = ', ', last = ' and ') {
 
 class ResultsRowHeader extends React.Component {
   firstRow() {
-    let message = 'Step 1: You searched for "' + joinArray(this.props.fetchedTitles) + '."';
+    let message = `Step 1: You searched for "${joinArray(this.props.fetchedTitles)}."`;
     if (this.props.fetching) {
       message += ' Fetching now…';
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? ' (there may be more)' : '';
-      message = message + ' I found ' + this.props.linkCount + atLeast + ' pages that link to the "' + joinArray(this.props.fetchedTitles, '", "', '" and "') + '" page:';
+      message += ` I found ${this.props.linkCount} ${atLeast} pages that link to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
     }
     return message;
   }
   otherRows() {
-    let message = this.props.rowPosition === constants.RESULTS_ROW_PENULTIMATE ? 'Final Step: ' : 'Step ' + this.props.rowNumber + ': ';
+    let message = this.props.rowPosition === constants.RESULTS_ROW_PENULTIMATE ? 'Final Step: ' : `Step ${this.props.rowNumber}: `;
     if (this.props.fetching) {
-      message += 'Fetching links to ' + joinArray(this.props.fetchedTitles, ', ', ' or ');
+      message += `Fetching links to ${joinArray(this.props.fetchedTitles, ', ', ' or ')}...`;
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? 'at least ' : '';
-      message += ' I found ' + atLeast + this.props.linkCount + ' pages that link to "' + joinArray(this.props.fetchedTitles, '", "', '" or "') + '":';
+      message += ` I found ${atLeast}${this.props.linkCount} pages that link to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}":`;
     }
     return message;
   }
@@ -92,7 +93,7 @@ const ResultsRowFooter = (props) => {
     }
     default: {
       if (props.linkCount > 0 && props.toFetchTitles.length > 0) {
-        message = 'From those ' + props.linkCount + ' pages, I picked ' + props.toFetchTitles.length + ' to move on to the next step: "' + joinArray(props.toFetchTitles, '", "', '" and "') + '"';
+        message = `From those ${props.linkCount} pages, I picked ${props.toFetchTitles.length} to move on to the next step: "${joinArray(props.toFetchTitles, '", "', '" and "')}"`;
       }
     }
   }
