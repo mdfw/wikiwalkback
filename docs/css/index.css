@@ -1,0 +1,45 @@
+@font-face {
+    font-family: EBGaramond-Regular;
+    src: url(EBGaramond-Regular.ttf);
+}
+
+p {
+  font-family: "EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif;
+  font-size: 1.2em;
+}
+body {
+  background-image: url('../assets/Wikipedia-puzzleglobe-V2_back-dim.png');
+  background-repeat: no-repeat;
+  	background-size:cover;
+
+}
+
+.searchArea2 {
+  top: 50%;
+  margin: 0;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.searchInOut-enter {
+  opacity: 0.01;
+}
+
+.searchInOut-enter.searchInOut-enter-active {
+  opacity: 1;
+  transition: opacity 700ms ease-in;
+}
+
+.searchInOut-leave {
+  opacity: 1;
+}
+
+.searchInOut-leave.searchInOut-leave-active {
+  opacity: 0.01;
+  transition: opacity 300ms ease-in;
+}
+
+@keyframes blinker {
+  50% { opacity: 0.2; }
+}
