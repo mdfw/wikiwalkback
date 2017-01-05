@@ -39,7 +39,7 @@
     "_build:assets": "cpr src/assets build/assets",
     "watch:assets": "run-s build:assets _watch:assets",
     "_watch:assets": "chokidar src/assets/**/* -c \"npm run build:assets\"",
-    "publicize": "cpr build public"
+    "publicize": "cpr build doc"
   },
   "author": "Mark Williams <mark@mdfw.me>",
   "license": "UNLICENSED",
