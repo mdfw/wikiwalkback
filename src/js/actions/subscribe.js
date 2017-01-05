@@ -29,18 +29,18 @@ class Walking {
         case constants.ROUND_STATUS_NONE: {
           const previousRound = this.rounds[i - 1];
           if (!previousRound) {
-            return actions.walkError('Round ' + round.round + ' could not find a previous round. This should not happen and is not user error.');
+            return actions.walkError(`Round ${round.round} could not find a previous round. This should not happen and is not user error.`);
           }
           const links = previousRound.getFetchedLinks(constants.WALK_WIDTH);
           if (links.length === 0) {
-            let message = 'No links found to walk from round ' + previousRound.round + '.';
+            let message = `No links found to walk from round ${previousRound.round}.`;
             if (previousRound.round === 0) {
               message += ' This is likely because your search did not return a page.';
             }
             return actions.walkError(message);
           }
           if (links.length > constants.WALK_WIDTH) {
-            return actions.walkError('Too many links returned from round ' + previousRound.round + '.');
+            return actions.walkError(`Too many links returned from round ${previousRound.round}.`);
           }
           return actions.updateRound(round.round, constants.ROUND_STATUS_SETLINKS, links);
         }

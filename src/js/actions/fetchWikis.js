@@ -56,11 +56,11 @@ const parseFetchedData = function parseFetchedData(data, pageid = null, pagename
 const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
   return function fetchPageDispatch(dispatch) {
     const lhlimit = constants.FETCH_LINKS_HERE_LIMIT > 0 ? constants.FETCH_LINKS_HERE_LIMIT : 10;
-    let url = 'https://en.wikipedia.org/w/api.php?action=query&prop=linkshere|info|pageimages&lhlimit=' + lhlimit + '&lhnamespace=0&format=json&origin=*&';
+    let url = `https://en.wikipedia.org/w/api.php?action=query&prop=linkshere|info|pageimages&lhlimit=${lhlimit}&lhnamespace=0&format=json&origin=*&`;
     if (pageid && pageid.length !== 0) {
-      url = url + 'pageids=' + pageid;
+      url = `${url}pageids=${pageid}`;
     } else if (pagename.length !== 0) {
-      url = url + 'titles=' + pagename;
+      url = `${url}titles=${pagename}`;
     }
     return fetch(url).then(function returnFetchResponse(response) {
       if (response.status < 200 || response.status >= 300) {
@@ -107,5 +107,6 @@ const dispatchFetches = function dispatchFetches(round, pageIdentifiers) {
     });
   };
 };
+
 exports.fetchPage = fetchPage;
 exports.dispatchFetches = dispatchFetches;
