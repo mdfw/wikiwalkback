@@ -3,6 +3,7 @@ import React from 'react';
 import ResultRows from './ResultRows';
 import constants from '../constants';
 import actions from '../actions/actions';
+import store from '../store';
 
 const ResultsHeader = props => (
   <div id="ResultsHeader">
@@ -17,7 +18,7 @@ ResultsHeader.propTypes = {
 const ResultsError = (props) => {
   let message = 'Unfortunately, an error occurred while fetching. I do not see an error message here though, so I am not sure what went wrong. Sorry about that.';
   if (props.errorMessage) {
-    message = 'Unfortunately, an error occurred while fetching. The error message reads "' + props.errorMessage + '"';
+    message = `Unfortunately, an error occurred while fetching. The error message reads "${props.errorMessage}"`;
   }
   const errorStyle = {
     fontFamily: '"EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif',
@@ -40,7 +41,6 @@ ResultsError.propTypes = {
 
 class ResultsContainer extends React.Component {
   tagClick(linkTitle) {
-    console.log('clicked on ' + linkTitle);
     this.props.dispatch(
       actions.resetWalkback(),
     );
@@ -51,8 +51,11 @@ class ResultsContainer extends React.Component {
       actions.updateWalkStatus(constants.WALK_STATUS_START),
     );
   }
-  finalClick(linkTitle) {
-    console.log('Should have opened the page' + linkTitle);
+  finalClick(linkTitle) { // eslint-disable-line class-methods-use-this
+    const state = store.getState();
+    if (linkTitle && linkTitle.length > 0 && state.wikipediaSubsite) {
+      window.open(`https://${state.wikipediaSubsite}.wikipedia.org/wiki/${linkTitle}`);
+    }
   }
   render() {
     let error = null;
