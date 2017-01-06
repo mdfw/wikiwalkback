@@ -109,7 +109,7 @@ class ResultsContainer extends React.Component {
           finalClick={linkTitle => this.finalClick(linkTitle)}
         />
         { error }
-        <p style={searchAgainStyle}>Search again!</p>
+        <p style={searchAgainStyle}>WalkBack again!</p>
         <SearchContainer searchFormSize={SEARCH_FORM_MINIMAL} router={this.props.router} />
       </div>
     );
