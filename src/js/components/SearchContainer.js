@@ -4,12 +4,13 @@ import SearchForm from './SearchForm';
 import constants from '../constants';
 import actions from '../actions/actions';
 
+export const SEARCH_FORM_MINIMAL = 'minSearch';
+export const SEARCH_FORM_MAXIMAL = 'maxSearch';
+
 class SearchFormContainer extends React.Component {
   onSubmit(e) {
     e.preventDefault();
-    this.props.dispatch(
-      actions.updateWalkStatus(constants.WALK_STATUS_START),
-    );
+    this.props.router.push(`/results/${this.props.currentInput}/${this.props.walkDepth}`);
   }
   onChange(input, walkDepth) {
     this.props.dispatch(
@@ -17,6 +18,10 @@ class SearchFormContainer extends React.Component {
     );
   }
   render() {
+    let minForm = false;
+    if (this.props.searchFormSize && this.props.searchFormSize === SEARCH_FORM_MINIMAL) {
+      minForm = true;
+    }
     return (
       <SearchForm
         onSubmit={e => this.onSubmit(e)}
@@ -26,12 +31,15 @@ class SearchFormContainer extends React.Component {
         walkDepthMax={constants.WALK_DEPTH_MAX}
         walkDepthMin={constants.WALK_DEPTH_MIN}
         searchReady={this.props.searchReady}
+        minimalForm={minForm}
       />
     );
   }
 }
 
 SearchFormContainer.propTypes = {
+  router: React.PropTypes.object.isRequired, // eslint-disable-line react/forbid-prop-types
+  searchFormSize: React.PropTypes.string,
   dispatch: React.PropTypes.func.isRequired,
   currentInput: React.PropTypes.string.isRequired,
   searchReady: React.PropTypes.bool.isRequired,
@@ -39,8 +47,9 @@ SearchFormContainer.propTypes = {
 };
 
 /** redux store map **/
-const mapStateToProps = function mapStateToProps(state) {
+const mapStateToProps = function mapStateToProps(state, ownprops) {
   return {
+    router: ownprops.router,
     currentInput: state.currentInput,
     walkDepth: state.rounds.length,
     searchReady: state.searchReady,

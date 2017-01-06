@@ -64,9 +64,9 @@ const finalRenderer = (tag, size, color) => (
     key={tag.key}
     style={{
       fontSize: `${size * 3}em`,
-      border: `1px solid ${color}`,
-      margin: '3px',
-      padding: '3px',
+      border: `3px solid ${color}`,
+      margin: '5px',
+      padding: '5px',
       display: 'inline-block',
       color: 'black',
     }}

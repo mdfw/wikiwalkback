@@ -25,6 +25,15 @@ const finalPage = function finalPage(finalLink) {
   };
 };
 
+const RESULTS_PARAMS = 'RESULTS_PARAMS';
+const resultsParams = function resultsParams(searchTerm, searchSteps) {
+  return {
+    type: RESULTS_PARAMS,
+    searchTerm: searchTerm,
+    searchSteps: searchSteps,
+  };
+};
+
 const UPDATE_WALK_STATUS = 'UPDATE_WALK_STATUS';
 const updateWalkStatus = function updateWalkStatus(status) {
   return {
@@ -87,6 +96,9 @@ exports.searchInput = searchInput;
 
 exports.FINAL_PAGE = FINAL_PAGE;
 exports.finalPage = finalPage;
+
+exports.RESULTS_PARAMS = RESULTS_PARAMS;
+exports.resultsParams = resultsParams;
 
 exports.UPDATE_WALK_STATUS = UPDATE_WALK_STATUS;
 exports.updateWalkStatus = updateWalkStatus;

@@ -79,6 +79,10 @@ class ResultRows extends React.Component {
           tagClick={this.props.finalClick}
         />,
       );
+      const separatorKey = 'final-sep';
+      rows.push(
+        <ResultsRowSeparator key={separatorKey} />,
+      );
     }
     return (
       <div id="result-rows">

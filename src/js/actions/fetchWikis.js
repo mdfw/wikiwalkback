@@ -83,8 +83,6 @@ const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
       );
     })
     .catch(function processFetchError(error) {
-      console.log('Error: ');
-      console.dir(error);
       return dispatch(
         actions.walkError(error),
       );

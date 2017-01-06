@@ -6,13 +6,15 @@ import constants from '../constants';
 function createNewState() {
   const newRounds = FetchRound.buildArrayOf(constants.WALK_DEPTH);
   return {
+    wikipediaSubsite: 'en',
     currentInput: '',
     searchReady: false,
     walkStatus: constants.WALK_STATUS_INPUT,
     walkError: null,
     rounds: newRounds,
     finalPageLink: null,
-    wikipediaSubsite: 'en',
+    resultsLastSearchTerm: null,
+    resultsLastSearchSteps: null,
   };
 }
 
@@ -30,6 +32,22 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
         action.depth >= constants.WALK_DEPTH_MIN) {
         if (action.depth !== newstate.rounds.length) {
           newstate.rounds = FetchRound.buildArrayOf(action.depth);
+        }
+      }
+      return newstate;
+    }
+    case actions.RESULTS_PARAMS: {
+      if (action.searchTerm === state.resultsLastSearchTerm &&
+        action.searchSteps === state.resultsLastSearchSteps) {
+        return state;
+      }
+      const newstate = Object.assign({}, state);
+      if (action.searchTerm) {
+        newstate.resultsLastSearchTerm = action.searchTerm;
+      }
+      if (action.searchSteps) {
+        if (action.searchSteps !== newstate.resultsLastSearchSteps) {
+          newstate.resultsLastSearchSteps = action.searchSteps;
         }
       }
       return newstate;
