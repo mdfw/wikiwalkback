@@ -2,17 +2,9 @@ import FetchRound from '../classes/FetchRound';
 import actions from '../actions/actions';
 import constants from '../constants';
 
-function buildRounds(walkDepth) {
-  const theRounds = [];
-  for (let i = 0; i < walkDepth; i++) {
-    theRounds.push(new FetchRound(i));
-  }
-  return theRounds;
-}
-
 // Creating a new state
 function createNewState() {
-  const newRounds = buildRounds(constants.WALK_DEPTH);
+  const newRounds = FetchRound.buildArrayOf(constants.WALK_DEPTH);
   return {
     currentInput: '',
     searchReady: false,
@@ -20,23 +12,9 @@ function createNewState() {
     walkError: null,
     rounds: newRounds,
     finalPageLink: null,
+    wikipediaSubsite: 'en',
   };
 }
-
-const updateRound = function updateRound(roundData, action) {
-  const roundToUpdate = Object.assign(new FetchRound(action.round), roundData);
-  if (action.status && action.status.length > 0) {
-    roundToUpdate.status = action.status;
-  }
-  if (action.pagesToFetch && action.pagesToFetch.length > 0) {
-    roundToUpdate.pagesToFetch = action.pagesToFetch;
-  }
-  if (action.pageFetched) {
-    roundToUpdate.pagesFetched = roundToUpdate.pagesFetched.concat(action.pageFetched);
-  }
-  return roundToUpdate;
-};
-
 
 // The main reducer. Looks for the action and makes decisions.
 const walkbackReducer = function walkbackReducer(state = createNewState(), action) {
@@ -51,7 +29,7 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
         action.depth <= constants.WALK_DEPTH_MAX &&
         action.depth >= constants.WALK_DEPTH_MIN) {
         if (action.depth !== newstate.rounds.length) {
-          newstate.rounds = buildRounds(action.depth);
+          newstate.rounds = FetchRound.buildArrayOf(action.depth);
         }
       }
       return newstate;
@@ -77,7 +55,11 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
     case actions.UPDATE_ROUND: {
       const foundRound = state.rounds[action.round];
       if (foundRound) {
-        const updatedRound = updateRound(foundRound, action);
+        const updatedRound = FetchRound.copyAndUpdate(foundRound,
+          action.status,
+          action.pagesToFetch,
+          action.pageFetched,
+        );
         const newstate = Object.assign({}, state);
         const newRounds = newstate
           .rounds.slice(0, action.round)
