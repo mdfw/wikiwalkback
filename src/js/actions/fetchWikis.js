@@ -78,6 +78,11 @@ const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
       return parsed;
     })
     .then(function parseFetchedPage(page) {
+      if (!page) {
+        const error = new Error('Search error');
+        error.response = 'Search resulted in no results. Try again.';
+        throw error;
+      }
       return dispatch(
         actions.updateRound(round, null, null, page),
       );

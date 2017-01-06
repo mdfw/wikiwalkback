@@ -62,6 +62,9 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
       if (Object.prototype.toString.call(action.errorMessage).slice(8, -1) === 'String') {
         newstate.walkError = action.errorMessage;
       }
+      if (Object.prototype.toString.call(action.errorMessage.response).slice(8, -1) === 'String') {
+        newstate.walkError = action.errorMessage.response;
+      }
       newstate.walkStatus = constants.WALK_STATUS_ERROR;
       return newstate;
     }
