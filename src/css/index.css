@@ -8,12 +8,26 @@ p {
   font-size: 1.2em;
 }
 body {
-  background-image: url('../assets/Wikipedia-puzzleglobe-V2_back-dim.png');
-  background-repeat: no-repeat;
-  	background-size:cover;
-
 }
 
+.bodyWithBackground {
+  background-image: url('../assets/Wikipedia-puzzleglobe-V2_back-dim.png');
+  background-repeat: no-repeat;
+  background-size:cover;
+  background-position: center center;
+}
+
+.bodyNoBackground {
+  
+}
+
+a {
+   border:none;
+  outline:none;
+  text-decoration:none;
+  color:inherit;
+  -webkit-tap-highlight-color: white;
+}
 .searchArea2 {
   top: 50%;
   margin: 0;

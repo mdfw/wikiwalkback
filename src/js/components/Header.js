@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router';
 
 const Header = function Header() {
   const headerStyle = {
@@ -7,11 +8,14 @@ const Header = function Header() {
     padding: '.3em',
     textAlign: 'center',
     opacity: '1',
+    textDecoration: 'none',
+    outline: 'none',
+    border: 'none',
   };
   return (
-    <div style={headerStyle} id="header">
-      <h1>WikiWalkBack</h1>
-    </div>
+    <header id="header">
+      <h1 style={headerStyle}><Link to={'/'}>WikiWalkBack</Link></h1>
+    </header>
   );
 };
 

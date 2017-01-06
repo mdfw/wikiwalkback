@@ -42,6 +42,7 @@ ResultsError.propTypes = {
 
 class ResultsContainer extends React.Component {
   componentDidMount() {
+    document.body.className = 'bodyNoBackground';
     this.startNewSearch(this.props.urlSearchTerm,
       Number(this.props.urlSteps),
       this.props.resultsLastSearchTerm,

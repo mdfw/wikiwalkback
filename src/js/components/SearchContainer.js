@@ -8,6 +8,9 @@ export const SEARCH_FORM_MINIMAL = 'minSearch';
 export const SEARCH_FORM_MAXIMAL = 'maxSearch';
 
 class SearchFormContainer extends React.Component {
+  componentDidMount() {
+    document.body.className = 'bodyWithBackground';
+  }
   onSubmit(e) {
     e.preventDefault();
     this.props.router.push(`/results/${this.props.currentInput}/${this.props.walkDepth}`);
