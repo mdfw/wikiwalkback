@@ -7,37 +7,24 @@ p {
   font-family: "EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif;
   font-size: 1.2em;
 }
-body {
+
+.bodyWithBackground {
   background-image: url('../assets/Wikipedia-puzzleglobe-V2_back-dim.png');
   background-repeat: no-repeat;
-  	background-size:cover;
-
+  background-size:cover;
+  background-position: center;
 }
 
-.searchArea2 {
-  top: 50%;
-  margin: 0;
-  position: absolute;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.bodyNoBackground {
+  
 }
 
-.searchInOut-enter {
-  opacity: 0.01;
-}
-
-.searchInOut-enter.searchInOut-enter-active {
-  opacity: 1;
-  transition: opacity 700ms ease-in;
-}
-
-.searchInOut-leave {
-  opacity: 1;
-}
-
-.searchInOut-leave.searchInOut-leave-active {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+header a {
+  border:none;
+  outline:none;
+  text-decoration:none;
+  color:inherit;
+  -webkit-tap-highlight-color: white;
 }
 
 @keyframes blinker {
