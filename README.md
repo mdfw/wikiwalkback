@@ -53,11 +53,14 @@ Open your browser to: http://localhost:8080.
 
 ### Screenshots
 
-* The Search page:
+*The Search page:*
+
 ![search](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-search.png "Search screen")
 
-* Search results top:
+*Search results top:*
+
 ![results 1](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-result1.png "Search result top")
 
-* Search results bottom;
+*Search results bottom:*
+
 ![results2](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-result2.png "Search result bottom")
