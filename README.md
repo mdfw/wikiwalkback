@@ -1,23 +1,58 @@
-# Thinkful React Starter
+# WikiWalkBack
 
-A template for developing React/Redux apps.
+Thinkful Capstone #3: Wikipedia search using Wikipedia API & React and Redux Framework
 
-## Getting started
+## Purpose
 
-### Setting up a project
+The purpose of this app is to see the connections between articles in Wikipedia. 
 
-* Move into your projects directory: `cd ~/YOUR_PROJECTS_DIRECTORY`
-* Clone this repository: `git clone https://github.com/oampo/thinkful-react-starter YOUR_PROJECT_NAME`
-* Move into the project directory: `cd YOUR_PROJECT_NAME`
-* Install the dependencies: `npm install`
-* Create a new repo on GitHub: https://github.com/new
-    * Make sure the "Initialize this repository with a README" option is left **un**checked
-* Update the remote to point to your GitHub repository: `git remote set-url origin https://github.com/YOUR_GITHUB_USERNAME/YOUR_REPOSITORY_NAME`
+## Example
 
-### Working on the project
+https://mdfw.github.io/wikiwalkback
 
-* Move into the project directory: `cd ~/YOUR_PROJECTS_DIRECTORY/YOUR_PROJECT_NAME`
-* Run the development task: `npm run dev`
-    * Starts a server running at http://localhost:8080
-    * Automatically rebuilds when any of your files change
+## Install it yourself
 
+```
+git clone https://github.com/mdfw/wikiwalkback.git
+
+$ cd wikiwalkback
+
+npm install
+
+npm start
+
+Open your browser to: http://localhost:8080.
+```
+
+### Possible future improvements:
+
+* Better presentation of resulting page
+* Popover on tags to give options to open the page on wikipedia or res-search (the current default)
+* Multiple language support for supported Wikipedia languages
+
+### Technologies
+
+#### Languages
+
+* Front-end: Javascript (ES6)
+
+#### Libraries
+
+* React.js
+* React-router.js
+* redux.js
+* react-wordcloud
+
+#### Tools
+
+* Webpack
+
+#### API
+
+* Wikipedia 
+
+### Screenshots
+
+![search](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-search.png "Search screen")
+![results 1](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-result1.png "Search result top")
+![results2](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-result2.png "Search result bottom")
