@@ -26,8 +26,8 @@ Open your browser to: http://localhost:8080.
 
 ### Possible future improvements:
 
-* Better presentation of resulting page
-* Popover on tags to give options to open the page on wikipedia or res-search (the current default)
+* Better presentation of final selection - would require a final fetch.
+* Popover on world cloud tags to give options to open the page on wikipedia or begin search with the topic of the word cloud tag (the current default).
 * Multiple language support for supported Wikipedia languages
 
 ### Technologies
@@ -53,6 +53,11 @@ Open your browser to: http://localhost:8080.
 
 ### Screenshots
 
+* The Search page:
 ![search](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-search.png "Search screen")
+
+* Search results top:
 ![results 1](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-result1.png "Search result top")
+
+* Search results bottom;
 ![results2](https://github.com/mdfw/wikiwalkback/blob/master/readme/wikiwalkback-result2.png "Search result bottom")
