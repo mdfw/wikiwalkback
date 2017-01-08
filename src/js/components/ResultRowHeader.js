@@ -29,14 +29,14 @@ class ResultsRowHeader extends React.Component {
       message += ' Fetching now…';
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? ' (there may be more)' : '';
-      message += ` I found ${this.props.linkCount} ${atLeast} pages that link to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
+      message += ` I found ${this.props.linkCount}${atLeast} pages that link to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
     }
     return message;
   }
   otherRows() {
     let message = this.props.rowPosition === constants.RESULTS_ROW_PENULTIMATE ? 'Final Step: ' : `Step ${this.props.rowNumber}: `;
     if (this.props.fetching) {
-      message += `Fetching links to ${joinArray(this.props.fetchedTitles, ', ', ' or ')}...`;
+      message += `Fetching links to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}"...`;
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? 'at least ' : '';
       message += ` I found ${atLeast}${this.props.linkCount} pages that link to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}":`;
