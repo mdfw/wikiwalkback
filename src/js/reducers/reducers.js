@@ -13,8 +13,10 @@ function createNewState() {
     walkError: null,
     rounds: newRounds,
     finalPageLink: null,
+    finalPageInfo: null,
     resultsLastSearchTerm: null,
     resultsLastSearchSteps: null,
+    randomTitles: null,
   };
 }
 
@@ -34,6 +36,11 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
           newstate.rounds = FetchRound.buildArrayOf(action.depth);
         }
       }
+      return newstate;
+    }
+    case actions.SET_RANDOM: {
+      const newstate = Object.assign({}, state);
+      newstate.randomTitles = action.titles;
       return newstate;
     }
     case actions.RESULTS_PARAMS: {
@@ -68,7 +75,15 @@ const walkbackReducer = function walkbackReducer(state = createNewState(), actio
       newstate.walkStatus = constants.WALK_STATUS_ERROR;
       return newstate;
     }
+    case actions.SET_FINAL_PAGE_INFO: {
+      const newstate = Object.assign({}, state);
+      newstate.finalPageInfo = action.finalInfo;
+      return newstate;
+    }
     case actions.FINAL_PAGE: {
+      if (!action.finalLink) {
+        return state;
+      }
       const newstate = Object.assign({}, state);
       newstate.finalPageLink = action.finalLink;
       return newstate;

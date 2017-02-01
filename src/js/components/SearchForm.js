@@ -1,4 +1,6 @@
 import React from 'react';
+import SearchFormSuggestions from './SearchFormSuggestions';
+import SiteDescription from './SiteDescription';
 
 const searchStyle = {
   float: 'none',
@@ -39,6 +41,7 @@ class SearchForm extends React.Component {
             onChange={e => this.onInputChange(e)}
             value={this.props.currentInput}
           /><br />
+          <SearchFormSuggestions />
           <p />
           <button
             type="submit"
@@ -59,7 +62,7 @@ class SearchForm extends React.Component {
     }
     return (
       <div id="maxForm">
-        <p><strong>Discover the hidden connections in Wikipedia.</strong></p>
+        <SiteDescription />
         <form style={formStyle} onSubmit={this.props.onSubmit}>
           <p>1. Enter a page to search for:</p>
           <input
@@ -68,6 +71,7 @@ class SearchForm extends React.Component {
             onChange={e => this.onInputChange(e)}
             value={this.props.currentInput}
           />
+          <SearchFormSuggestions />
           <p>2. Select how many <i>generations</i> to walk through.</p>
           <select
             id="walkDepth"
@@ -111,4 +115,3 @@ SearchForm.propTypes = {
 };
 
 export default SearchForm;
-

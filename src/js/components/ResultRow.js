@@ -28,6 +28,7 @@ const fetchingRenderer = (tag, size, color) => (
       padding: '3px',
       display: 'inline-block',
       color: 'black',
+      cursor: 'pointer',
     }}
   >{tag.value}</span>
 );
@@ -43,6 +44,7 @@ const solidRendererEven = (tag, size, color) => (
       padding: '3px',
       display: 'inline-block',
       color: 'black',
+      cursor: 'pointer',
     }}
   >{tag.value}</span>
 );
@@ -56,6 +58,7 @@ const solidRendererOdd = (tag, size, color) => (
       padding: '3px',
       display: 'inline-block',
       color: 'black',
+      cursor: 'pointer',
     }}
   >{tag.value}</span>
 );
@@ -69,6 +72,7 @@ const finalRenderer = (tag, size, color) => (
       padding: '5px',
       display: 'inline-block',
       color: 'black',
+      cursor: 'pointer',
     }}
   >{tag.value}</span>
 );
@@ -143,13 +147,15 @@ class ResultRow extends React.Component {
           fetchedTitles={this.fetchedTitles()}
           maxPossibleLinks={this.props.maxPossibleLinks}
         />
-        <TagCloud
-          tags={tags}
-          minSize={1}
-          maxSize={2}
-          renderer={renderer}
-          onClick={tag => this.onClick(tag)}
-        />
+        <div style={{ maxWidth: 500, margin: '0 auto' }}>
+          <TagCloud
+            tags={tags}
+            minSize={1}
+            maxSize={2}
+            renderer={renderer}
+            onClick={tag => this.onClick(tag)}
+          />
+        </div>
         <ResultsRowFooter
           rowPosition={this.props.rowPosition}
           linkCount={this.props.linksHere.length}

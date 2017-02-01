@@ -2,14 +2,32 @@ import React from 'react';
 import { connect } from 'react-redux';
 import ResultRow from './ResultRow';
 import constants from '../constants';
+import ResultFinalPageRow from './ResultFinalPageRow';
 
-const ResultsRowSeparator = () => {
+const ResultsRowSeparator = ({ finalSeparator }) => {
   const sepStyle = {
-    height: '40px',
+    height: '50px',
+    margin: '0 auto',
+    textAlign: 'center',
+    padding: '30px',
   };
+  if (finalSeparator) {
+    return <div style={sepStyle} />;
+  }
   return (
-    <div style={sepStyle} />
+    <div style={sepStyle}>
+      <img src="assets/results.svg" alt="results" height="50" width="50" />
+    </div>
   );
+};
+
+ResultsRowSeparator.propTypes = {
+  finalSeparator: React.PropTypes.bool,
+};
+
+
+const rowsHolderSytle = {
+  margin: '0 auto',
 };
 
 class ResultRows extends React.Component {
@@ -79,13 +97,20 @@ class ResultRows extends React.Component {
           tagClick={this.props.finalClick}
         />,
       );
+      if (this.props.finalPageLink && this.props.finalPageLink.linkId) {
+        rows.push(<ResultFinalPageRow key="final-result-row" linkClick={this.props.finalClick} />);
+      }
+
       const separatorKey = 'final-sep';
       rows.push(
-        <ResultsRowSeparator key={separatorKey} />,
+        <ResultsRowSeparator
+          key={separatorKey}
+          finalSeparator
+        />,
       );
     }
     return (
-      <div id="result-rows">
+      <div id="result-rows" style={rowsHolderSytle}>
         { rows }
       </div>
     );

@@ -17,6 +17,23 @@ const searchInput = function searchInput(input, depth) {
   };
 };
 
+const SET_RANDOM = 'SET_RANDOM';
+const setRandom = function setRandom(randomTitles) {
+  return {
+    type: SET_RANDOM,
+    titles: randomTitles,
+  };
+};
+
+const getRandom = function getRandom() {
+  return function startingRandomFetch(dispatch) {
+    dispatch(
+      fetchWikis.fetchRandomTitles(),
+    );
+  };
+};
+
+/* This is the link to the final page, not the info. */
 const FINAL_PAGE = 'FINAL_PAGE';
 const finalPage = function finalPage(finalLink) {
   return {
@@ -24,6 +41,24 @@ const finalPage = function finalPage(finalLink) {
     finalLink: finalLink,
   };
 };
+
+
+const SET_FINAL_PAGE_INFO = 'SET_FINAL_PAGE_INFO';
+const setFinalPageInfo = function setFinalPageInfo(info) {
+  return {
+    type: SET_FINAL_PAGE_INFO,
+    finalInfo: info,
+  };
+};
+
+const fetchFinalPageInfo = function fetchFinalPageInfo(pageId) {
+  return function startingFinalPageFetch(dispatch) {
+    dispatch(
+      fetchWikis.fetchFinalPageInfoAPI(pageId),
+    );
+  };
+};
+
 
 const RESULTS_PARAMS = 'RESULTS_PARAMS';
 const resultsParams = function resultsParams(searchTerm, searchSteps) {
@@ -91,11 +126,21 @@ const startFetch = function startFetch(round, pagesToFetch) {
 exports.RESET_WALKBACK = RESET_WALKBACK;
 exports.resetWalkback = resetWalkback;
 
+exports.SET_RANDOM = SET_RANDOM;
+exports.setRandom = setRandom;
+
+exports.getRandom = getRandom;
+
 exports.SEARCH_INPUT = SEARCH_INPUT;
 exports.searchInput = searchInput;
 
 exports.FINAL_PAGE = FINAL_PAGE;
 exports.finalPage = finalPage;
+
+exports.SET_FINAL_PAGE_INFO = SET_FINAL_PAGE_INFO;
+exports.setFinalPageInfo = setFinalPageInfo;
+
+exports.fetchFinalPageInfo = fetchFinalPageInfo;
 
 exports.RESULTS_PARAMS = RESULTS_PARAMS;
 exports.resultsParams = resultsParams;

@@ -26,16 +26,18 @@ class SearchFormContainer extends React.Component {
       minForm = true;
     }
     return (
-      <SearchForm
-        onSubmit={e => this.onSubmit(e)}
-        onChange={(input, walkDepth) => this.onChange(input, walkDepth)}
-        currentInput={this.props.currentInput}
-        walkDepth={this.props.walkDepth}
-        walkDepthMax={constants.WALK_DEPTH_MAX}
-        walkDepthMin={constants.WALK_DEPTH_MIN}
-        searchReady={this.props.searchReady}
-        minimalForm={minForm}
-      />
+      <div>
+        <SearchForm
+          onSubmit={e => this.onSubmit(e)}
+          onChange={(input, walkDepth) => this.onChange(input, walkDepth)}
+          currentInput={this.props.currentInput}
+          walkDepth={this.props.walkDepth}
+          walkDepthMax={constants.WALK_DEPTH_MAX}
+          walkDepthMin={constants.WALK_DEPTH_MIN}
+          searchReady={this.props.searchReady}
+          minimalForm={minForm}
+        />
+      </div>
     );
   }
 }

@@ -95,6 +95,72 @@ const fetchPage = function fetchPage(round, pageid = null, pagename = null) {
   };
 };
 
+const parseRandomTitles = function parseRandomTitles(data) {
+  const allTitles = data.query.random;
+  const pageTitles = [];
+  allTitles.forEach((element) => {
+    pageTitles.push(element.title);
+  });
+  return pageTitles;
+};
+
+const fetchRandomTitles = function fetchRandomTitles() {
+  return function fetchRandomDispatch(dispatch) {
+    const url = 'https://en.wikipedia.org/w/api.php?action=query&list=random&rnlimit=3&rnnamespace=0&format=json&origin=*';
+    return fetch(url).then(function returnFetchResponse(response) {
+      if (response.status < 200 || response.status >= 300) {
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+      }
+      return response;
+    })
+    .then(function processJsonResponse(response) {
+      return response.json();
+    })
+    .then(parseRandomTitles)
+    .then(function parseFetchedPage(titles) {
+      return dispatch(
+        actions.setRandom(titles),
+      );
+    })
+    .catch(function processFetchError(error) {
+      console.log(`Error getting random pages: ${error}`);
+    });
+  };
+};
+
+
+const fetchFinalPageInfoAPI = function fetchFinalPageInfoAPI(pageId) {
+  return function fetchFinalInfoDispatch(dispatch) {
+    const url = `https://en.wikipedia.org/w/api.php?action=query&prop=info|pageimages|extracts&format=json&exsectionformat=plain&exintro=true&origin=*&pageids=${pageId}`;
+    return fetch(url).then(function returnFetchResponse(response) {
+      if (response.status < 200 || response.status >= 300) {
+        const error = new Error(response.statusText);
+        error.response = response;
+        throw error;
+      }
+      return response;
+    })
+    .then(function processJsonResponse(response) {
+      return response.json();
+    })
+    .then(function getFinalPageInfo(data) {
+      const pageInfo = data.query.pages[pageId];
+      if (!pageInfo || pageInfo.length === 0) {
+        return null;
+      }
+      return dispatch(
+        actions.setFinalPageInfo(pageInfo),
+      );
+    })
+    .catch(function processFetchError(error) {
+      console.log(`Error getting final page info: ${error}`);
+    });
+  };
+};
+
+
 const dispatchFetches = function dispatchFetches(round, pageIdentifiers) {
   return function fetchMultiple(dispatch) {
     pageIdentifiers.forEach(function fetchThisPage(pageIdentifier) {
@@ -113,3 +179,5 @@ const dispatchFetches = function dispatchFetches(round, pageIdentifiers) {
 
 exports.fetchPage = fetchPage;
 exports.dispatchFetches = dispatchFetches;
+exports.fetchRandomTitles = fetchRandomTitles;
+exports.fetchFinalPageInfoAPI = fetchFinalPageInfoAPI;

@@ -4,7 +4,7 @@ import { Link } from 'react-router';
 const Header = function Header() {
   const headerStyle = {
     fontFamily: '"EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif',
-    maxWidth: '95%',
+    maxWidth: '100%',
     padding: '.3em',
     textAlign: 'center',
     opacity: '1',

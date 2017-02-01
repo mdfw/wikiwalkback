@@ -22,26 +22,46 @@ function joinArray(arr, between = ', ', last = ' and ') {
   return outStr;
 }
 
+/* Shows the header for each result row
+ * "You searched for...
+ */
 class ResultsRowHeader extends React.Component {
   firstRow() {
-    let message = `Step 1: You searched for "${joinArray(this.props.fetchedTitles)}."`;
+    const stepNum = 'Step 1';
+    let message = `You searched for "${joinArray(this.props.fetchedTitles)}."`;
     if (this.props.fetching) {
       message += ' Fetching now…';
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? ' (there may be more)' : '';
-      message += ` I found ${this.props.linkCount}${atLeast} pages that link to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
+      message += ` There are at least ${this.props.linkCount}${atLeast} pages that link to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
     }
-    return message;
+    return (
+      <div>
+        -{stepNum}-
+        <br />
+        {message}
+        <div style={{ color: 'gray', fontSize: '0.5em', margin: '10px' }}>
+          (Hint: click on any tag to start a new walk with that seed)
+        </div>
+      </div>
+    );
   }
   otherRows() {
-    let message = this.props.rowPosition === constants.RESULTS_ROW_PENULTIMATE ? 'Final Step: ' : `Step ${this.props.rowNumber}: `;
+    const stepNum = this.props.rowPosition === constants.RESULTS_ROW_PENULTIMATE ? 'Final Step' : `Step ${this.props.rowNumber}`;
+    let message = '';
     if (this.props.fetching) {
       message += `Fetching links to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}"...`;
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? 'at least ' : '';
       message += ` I found ${atLeast}${this.props.linkCount} pages that link to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}":`;
     }
-    return message;
+    return (
+      <div>
+        -{stepNum}-
+        <br />
+        {message}
+      </div>
+    );
   }
   render() {
     const headerStyle = {
@@ -49,6 +69,7 @@ class ResultsRowHeader extends React.Component {
       float: 'none',
       textAlign: 'center',
       fontSize: '2em',
+      marginBottom: '8px',
     };
     let message = '';
     switch (this.props.rowPosition) {
@@ -70,7 +91,6 @@ class ResultsRowHeader extends React.Component {
     );
   }
 }
-
 ResultsRowHeader.propTypes = {
   rowNumber: React.PropTypes.number.isRequired,
   rowPosition: React.PropTypes.string.isRequired,
@@ -81,6 +101,9 @@ ResultsRowHeader.propTypes = {
 };
 
 
+/* Shows the footer for each result row
+ * "From those...
+ */
 const ResultsRowFooter = (props) => {
   let message = '';
   switch (props.rowPosition) {
@@ -93,7 +116,7 @@ const ResultsRowFooter = (props) => {
     }
     default: {
       if (props.linkCount > 0 && props.toFetchTitles.length > 0) {
-        message = `From those ${props.linkCount} pages, I picked ${props.toFetchTitles.length} to move on to the next step: "${joinArray(props.toFetchTitles, '", "', '" and "')}"`;
+        message = `From those ${props.linkCount} pages, I picked ${props.toFetchTitles.length} random titles to move on to the next step: "${joinArray(props.toFetchTitles, '", "', '" and "')}"`;
       }
     }
   }
@@ -102,6 +125,7 @@ const ResultsRowFooter = (props) => {
     float: 'none',
     textAlign: 'center',
     fontSize: '2em',
+    marginTop: '8px',
   };
   return (
     <div style={footerStyle}>
