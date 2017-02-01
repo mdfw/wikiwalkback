@@ -3,7 +3,8 @@ module.exports = {
     "plugins": [
         "react",
         "jsx-a11y",
-        "import"
+        "import",
+        "no-only-tests"
     ],
     "env": {
         "browser": true,
@@ -21,5 +22,6 @@ module.exports = {
       "object-shorthand": 0,
       "prefer-arrow-callback": ["error", { "allowNamedFunctions": true }],
       "no-plusplus": ["error", { "allowForLoopAfterthoughts": true }],
+      "no-only-tests/no-only-tests": 2
     }
 };
