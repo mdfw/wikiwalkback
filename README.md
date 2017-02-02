@@ -49,7 +49,10 @@ Open your browser to: http://localhost:8080.
 
 #### API
 
-* Wikipedia 
+* Wikipedia
+
+## Acknowledgements
+* Uses Bottom by Arthur Shlain from the Noun Project under CC BY 3.0 US
 
 ### Screenshots
 
