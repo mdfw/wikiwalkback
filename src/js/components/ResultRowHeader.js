@@ -31,6 +31,8 @@ class ResultsRowHeader extends React.Component {
     let message = `You searched for "${joinArray(this.props.fetchedTitles)}."`;
     if (this.props.fetching) {
       message += ' Fetching now…';
+    } else if (this.props.linkCount === 1) {
+      message += ` There is only 1 page that links to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? ' (there may be more)' : '';
       message += ` There are at least ${this.props.linkCount}${atLeast} pages that link to the "${joinArray(this.props.fetchedTitles, '", "', '" and "')}" page:`;
@@ -51,6 +53,8 @@ class ResultsRowHeader extends React.Component {
     let message = '';
     if (this.props.fetching) {
       message += `Fetching links to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}"...`;
+    } else if (this.props.linkCount === 1) {
+      message += ` I found 1 page that links to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}":`;
     } else if (this.props.linkCount > 0) {
       const atLeast = this.props.linkCount === this.props.maxPossibleLinks ? 'at least ' : '';
       message += ` I found ${atLeast}${this.props.linkCount} pages that link to "${joinArray(this.props.fetchedTitles, '", "', '" or "')}":`;
@@ -116,7 +120,11 @@ const ResultsRowFooter = (props) => {
     }
     default: {
       if (props.linkCount > 0 && props.toFetchTitles.length > 0) {
-        message = `From those ${props.linkCount} pages, I picked ${props.toFetchTitles.length} random titles to move on to the next step: "${joinArray(props.toFetchTitles, '", "', '" and "')}"`;
+        if (props.toFetchTitles.length === 1) {
+          message = `Since there is only 1 page, I used "${joinArray(props.toFetchTitles, '", "', '" and "')}" for the next step:`;
+        } else {
+          message = `From those ${props.linkCount} pages, I picked ${props.toFetchTitles.length} random titles to move on to the next step: "${joinArray(props.toFetchTitles, '", "', '" and "')}"`;
+        }
       }
     }
   }
