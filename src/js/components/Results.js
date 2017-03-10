@@ -70,9 +70,9 @@ class ResultsContainer extends React.Component {
     }
   }
   render() {
-    let error = null;
+    let walkError = null;
     if (this.props.status === constants.WALK_STATUS_ERROR) {
-      error = <ResultsError errorMessage={this.props.walkError} />;
+      walkError = <ResultsError errorMessage={this.props.walkError} />;
     }
     const searchAgainStyle = {
       fontFamily: '"EBGaramond-Regular","Palatino Linotype", "Book Antiqua", Palatino, serif',
@@ -87,7 +87,7 @@ class ResultsContainer extends React.Component {
             tagClick={linkTitle => this.tagClick(linkTitle)}
             finalClick={linkTitle => this.finalClick(linkTitle)}
           />
-          { error }
+          { walkError }
           <p style={searchAgainStyle}>WalkBack again!</p>
           <SearchContainer searchFormSize={SEARCH_FORM_MINIMAL} router={this.props.router} />
         </div>
