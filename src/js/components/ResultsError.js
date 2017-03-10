@@ -24,4 +24,4 @@ ResultsError.propTypes = {
   errorMessage: React.PropTypes.string,
 };
 
-exports.ResultsError = ResultsError;
+module.exports = ResultsError;
