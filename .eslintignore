@@ -1,4 +1,5 @@
 webpack.config.js
+webpack.config.prod.js
 build
 node_modules
 *.log
