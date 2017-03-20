@@ -1,10 +1,10 @@
 # WikiWalkBack
 
-Thinkful Capstone #3: Wikipedia search using Wikipedia API & React and Redux Framework
+Wikipedia search using Wikipedia API. React + Redux frontend work.
 
 ## Purpose
 
-The purpose of this app is to see the connections between articles in Wikipedia. 
+See the connections between articles in Wikipedia in a non-intuitive way.
 
 ## Example
 
@@ -26,7 +26,6 @@ Open your browser to: http://localhost:8080.
 
 ### Possible future improvements:
 
-* Better presentation of final selection - would require a final fetch.
 * Popover on world cloud tags to give options to open the page on wikipedia or begin search with the topic of the word cloud tag (the current default).
 * Multiple language support for supported Wikipedia languages
 
@@ -38,10 +37,10 @@ Open your browser to: http://localhost:8080.
 
 #### Libraries
 
-* React.js
-* React-router.js
-* redux.js
-* react-wordcloud
+* React.js (BSD License)
+* React-router.js (MIT License)
+* redux.js (MIT License)
+* react-wordcloud (MIT License)
 
 #### Tools
 
@@ -53,6 +52,7 @@ Open your browser to: http://localhost:8080.
 
 ## Acknowledgements
 * Uses Bottom by Arthur Shlain from the Noun Project under CC BY 3.0 US
+* Wikimedia puzzleglobe back by the Wikimedia Foundation under CC-BY-SA 3.0 Un (https://wikimediafoundation.org/wiki/File:Wikipedia-puzzleglobe-V2_back.png)
 
 ### Screenshots
 
