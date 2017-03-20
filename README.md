@@ -51,8 +51,8 @@ Open your browser to: http://localhost:8080.
 * Wikipedia
 
 ## Acknowledgements
-* Uses Bottom by Arthur Shlain from the Noun Project under CC BY 3.0 US
-* Wikimedia puzzleglobe back by the Wikimedia Foundation under CC-BY-SA 3.0 Un (https://wikimediafoundation.org/wiki/File:Wikipedia-puzzleglobe-V2_back.png)
+* Uses Bottom by Arthur Shlain from the Noun Project under CC BY-SA 3.0
+* Wikimedia puzzleglobe back by the Wikimedia Foundation under CC BY-SA 3.0 (https://wikimediafoundation.org/wiki/File:Wikipedia-puzzleglobe-V2_back.png)
 
 ### Screenshots
 
